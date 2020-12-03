@@ -25,6 +25,7 @@ export interface DropData {
 export class DropListComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'count', 'description'];
   dataSource: MatTableDataSource<DropData>;
+  liteItemList: any[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -32,6 +33,7 @@ export class DropListComponent implements AfterViewInit {
   constructor() {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+    this.liteItemList = itemList.root['道具'].map((item: any) => { return { id: item['_編號'], name: item['_基本名稱'] } });
   }
 
   ngAfterViewInit() {
@@ -65,20 +67,13 @@ export class DropListComponent implements AfterViewInit {
   }
 
   private generateDropTxt(drop: any) {
-    let txt = '';
+    const drops = [];
     for (let i = 1; i <= 40; i++) {
-      if (drop['_item'+i]) {
-        txt += itemList.root['道具'].find((item: any) => { return item['_編號'] === drop['_item'+i]; })['_基本名稱'];
-        if (+drop['_count'+i] > 1) {
-          txt += 'x'
-          txt += drop['_count'+i];
-        }
-        txt += ', ';
-      }
+      if (drop['_item'+i]) drops.push({ id: drop['_item'+i], count: drop['_count'+i]});
     }
-    if (txt != '') {
-      return txt.substr( 0, txt.length - 2 )
-    }
-    return '';
+    return drops.map((d) => {
+      return this.liteItemList.find((i) => i.id === d.id).name + (d.count !== '1' ? 'x' + d.count : '');
+    }).join(', ');
+
   }
 }
