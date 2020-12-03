@@ -36,11 +36,34 @@ export class ItemListComponent implements AfterViewInit {
     const datas = itemList.root['道具'].filter((item: any) => {
       return typeof item !== 'string'
     }).map((item: any) => {
+      let addDescription = '';
+      if (item['_物品類別'] === '寶石') {
+        if (item['_動態資料1'] === '0') {
+          addDescription += '部位: 頭　';
+        } else if (item['_動態資料1'] === '1'){
+          addDescription += '部位: 顔　';
+        } else if (item['_動態資料1'] === '2'){
+          addDescription += '部位: 武器　';
+        } else if (item['_動態資料1'] === '3'){
+          addDescription += '部位: 腕　';
+        } else if (item['_動態資料1'] === '4'){
+          addDescription += '部位: 胴　';
+        } else if (item['_動態資料1'] === '5'){
+          addDescription += '部位: 背　';
+        } else if (item['_動態資料1'] === '6'){
+          addDescription += '部位: 足　';
+        } else if (item['_動態資料1'] === '7'){
+          addDescription += '部位: アクセ　';
+        }
+        if (item['_動態資料2']) {
+          addDescription += `安定度: ${+item['_動態資料2'] / 10}　`;
+        }
+      }
       return {
         id: item['_編號'],
         name: item['_基本名稱'],
         type: item['_物品類別'],
-        description: item['_說明定義']
+        description: item['_說明定義'] ? addDescription + item['_說明定義'] : ''
       }
     });
     for (const data of datas) {

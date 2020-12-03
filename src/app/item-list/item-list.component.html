@@ -8,7 +8,10 @@
 
     <ng-container matColumnDef="id">
       <mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-      <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row"> {{row.id}} </mat-cell>
+      <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row">
+         {{row.id}}
+         <a fxFlexFill [routerLink]="'/item/'+row.id" class="mat-row-link"></a>
+       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
@@ -23,7 +26,7 @@
 
     <ng-container matColumnDef="description">
       <mat-header-cell style="padding-right: 1.5vw;"  *matHeaderCellDef mat-sort-header> 説明 </mat-header-cell>
-      <mat-cell style="padding-right: 1.5vw;"  *matCellDef="let row"> {{row.description}} </mat-cell>
+      <mat-cell style="padding-right: 1.5vw;" *matCellDef="let row"> {{row.description}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

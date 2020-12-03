@@ -1,0 +1,237 @@
+<h1 style="margin: 3vw 3vw 0 3vw">{{item['_基本名稱']}}</h1>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        基本情報
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">名称</p>
+        <p class="List-Item-Text">{{item['_基本名稱']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">種類</p>
+        <p class="List-Item-Text">{{item['_物品類別']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">説明</p>
+        <p class="List-Item-Text">{{item['_說明定義']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">重量</p>
+        <p class="List-Item-Text">{{item['_重量']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">買値</p>
+        <p class="List-Item-Text">{{item['_價格']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">売値</p>
+        <p class="List-Item-Text">{{item['_收購價格']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">錬金値</p>
+        <p class="List-Item-Text">{{item['_鍊金點數']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">使用</p>
+        <p class="List-Item-Text">{{item['_可使用'] === '是' ? '可' : '不可'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">スタック</p>
+        <p class="List-Item-Text">{{item['可堆疊'] === '是' ? '可' : '不可'}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_不可交易'] === '是'">
+        <p class="List-Item-Title">トレード</p>
+        <p class="List-Item-Text">不可</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_不可存倉庫'] === '是'">
+        <p class="List-Item-Title">倉庫移動</p>
+        <p class="List-Item-Text">不可</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel expanded *ngIf="item && item['_無組合變化']">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        装備
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">部位</p>
+        <p class="List-Item-Text">{{item['_物品類別']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_等級限制']">
+        <p class="List-Item-Title">必要レベル</p>
+        <p class="List-Item-Text">{{item['_等級限制']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="+item['_物品等級'] < 10">
+        <p class="List-Item-Title">ランク</p>
+        <p class="List-Item-Text">{{'IPSGD_R_U'[+item['_物品等級']]}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_打孔上限']">
+        <p class="List-Item-Title">スロット</p>
+        <p class="List-Item-Text">{{item['_打孔上限']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_HP']">
+        <p class="List-Item-Title">HP</p>
+        <p class="List-Item-Text">{{item['_HP']}} {{item['_HP定義'] === '最大值百分比' ? '%' : ''}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_MP']">
+        <p class="List-Item-Title">MP</p>
+        <p class="List-Item-Text">{{item['_MP']}} {{item['_MP定義'] === '最大值百分比' ? '%' : ''}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_力量']">
+        <p class="List-Item-Title">STR</p>
+        <p class="List-Item-Text">{{item['_力量']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_體質']">
+        <p class="List-Item-Title">VIT</p>
+        <p class="List-Item-Text">{{item['_體質']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_智力']">
+        <p class="List-Item-Title">INT</p>
+        <p class="List-Item-Text">{{item['_智力']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_信仰']">
+        <p class="List-Item-Title">FAI</p>
+        <p class="List-Item-Text">{{item['_信仰']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_速度']">
+        <p class="List-Item-Title">AGI</p>
+        <p class="List-Item-Text">{{item['_速度']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_靈巧']">
+        <p class="List-Item-Title">DEX</p>
+        <p class="List-Item-Text">{{item['_靈巧']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_平均攻擊']">
+        <p class="List-Item-Title">ATK</p>
+        <p class="List-Item-Text">{{item['_平均攻擊']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_攻擊變數']">
+        <p class="List-Item-Title">攻撃変数</p>
+        <p class="List-Item-Text">{{item['_攻擊變數']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_防禦']">
+        <p class="List-Item-Title">DEF</p>
+        <p class="List-Item-Text">{{item['_防禦']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_魔攻']">
+        <p class="List-Item-Title">MATK</p>
+        <p class="List-Item-Text">{{item['_魔攻']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_魔防']">
+        <p class="List-Item-Title">MDEF</p>
+        <p class="List-Item-Text">{{item['_魔防']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_閃躲']">
+        <p class="List-Item-Title">AVOID</p>
+        <p class="List-Item-Text">{{item['_閃躲']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_命中']">
+        <p class="List-Item-Title">HIT</p>
+        <p class="List-Item-Text">{{item['_命中']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_無屬攻擊']">
+        <p class="List-Item-Title">無属性攻撃</p>
+        <p class="List-Item-Text">{{item['_無屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_火屬攻擊']">
+        <p class="List-Item-Title">火属性攻撃</p>
+        <p class="List-Item-Text">{{item['_火屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_水屬攻擊']">
+        <p class="List-Item-Title">水屬攻擊</p>
+        <p class="List-Item-Text">{{item['_水屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_風屬攻擊']">
+        <p class="List-Item-Title">風属性攻撃</p>
+        <p class="List-Item-Text">{{item['_風屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_地屬攻擊']">
+        <p class="List-Item-Title">土属性攻撃</p>
+        <p class="List-Item-Text">{{item['_地屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_光屬攻擊']">
+        <p class="List-Item-Title">光属性攻撃</p>
+        <p class="List-Item-Text">{{item['_光屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_闇屬攻擊']">
+        <p class="List-Item-Title">闇属性攻撃</p>
+        <p class="List-Item-Text">{{item['_闇屬攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_金錢攻擊']">
+        <p class="List-Item-Title">金銭攻撃</p>
+        <p class="List-Item-Text">{{item['_金錢攻擊']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_無屬防禦']">
+        <p class="List-Item-Title">無属性防御</p>
+        <p class="List-Item-Text">{{item['_無屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_火屬防禦']">
+        <p class="List-Item-Title">火属性防御</p>
+        <p class="List-Item-Text">{{item['_火屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_水屬防禦']">
+        <p class="List-Item-Title">水屬防御</p>
+        <p class="List-Item-Text">{{item['_水屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_風屬防禦']">
+        <p class="List-Item-Title">風属性防御</p>
+        <p class="List-Item-Text">{{item['_風屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_地屬防禦']">
+        <p class="List-Item-Title">土属性防御</p>
+        <p class="List-Item-Text">{{item['_地屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_光屬防禦']">
+        <p class="List-Item-Title">光属性防御</p>
+        <p class="List-Item-Text">{{item['_光屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_闇屬防禦']">
+        <p class="List-Item-Title">闇属性防御</p>
+        <p class="List-Item-Text">{{item['_闇屬防禦']}}%</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_金錢防禦']">
+        <p class="List-Item-Title">金銭防御</p>
+        <p class="List-Item-Text">{{item['_金錢防禦']}}%</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded *ngIf="item && item['_物品類別'] === '寶石' && item['_物品等級']">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        結晶
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item" *ngIf="item['_動態資料1']">
+        <p class="List-Item-Title">部位</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 0">頭</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 1">顔</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 2">武器</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 3">腕</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 4">胴</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 5">背</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 6">足</p>
+        <p class="List-Item-Text" *ngIf="+item['_動態資料1'] === 7">アクセ</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_動態資料2']">
+        <p class="List-Item-Title">安定度</p>
+        <p class="List-Item-Text">{{+item['_動態資料2'] / 10}}</p>
+      </div>
+      <div class="List-Item" *ngIf="item['_原型名稱']">
+        <p class="List-Item-Title">接頭</p>
+        <p class="List-Item-Text">{{item['_原型名稱']}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>

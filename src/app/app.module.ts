@@ -10,12 +10,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ItemListComponent } from './item-list/item-list.component';
+import { ItemComponent } from './item/item.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ItemListComponent,
+    ItemComponent,
   ],
   imports: [
     BrowserModule,
