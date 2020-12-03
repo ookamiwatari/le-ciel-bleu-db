@@ -1,33 +1,33 @@
-<mat-form-field style="margin: 30px 30px 0; width: 50%;">
+<mat-form-field style="margin: 1.5vw 1.5vw 0; width: 50%;">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="結晶" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8" style="margin: 0 30px;">
+<div class="mat-elevation-z8" style="margin: 0 1.5vw;">
   <table mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-      <td mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.id}} </td>
+      <mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row"> {{row.id}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 名前 </th>
-      <td mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.name}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 名前 </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 種類 </th>
-      <td mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.type}} </td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> 種類 </mat-header-cell>
+      <mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.type}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> 説明 </th>
-      <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+      <mat-header-cell style="padding-right: 1.5vw;"  *matHeaderCellDef mat-sort-header> 説明 </mat-header-cell>
+      <mat-cell style="padding-right: 1.5vw;"  *matCellDef="let row"> {{row.description}} </mat-cell>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
