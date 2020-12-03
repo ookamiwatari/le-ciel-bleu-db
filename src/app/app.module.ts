@@ -13,6 +13,7 @@ import { ItemListComponent } from './item-list/item-list.component';
 import { ItemComponent } from './item/item.component';
 import { DropListComponent } from './drop-list/drop-list.component';
 import { MonsterListComponent } from './monster-list/monster-list.component';
+import { MonsterComponent } from './monster/monster.component';
 
 
 
@@ -23,6 +24,7 @@ import { MonsterListComponent } from './monster-list/monster-list.component';
     ItemComponent,
     DropListComponent,
     MonsterListComponent,
+    MonsterComponent,
   ],
   imports: [
     BrowserModule,

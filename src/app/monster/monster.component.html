@@ -1,0 +1,273 @@
+<h1 style="margin: 3vw 3vw 0 3vw">{{monster['_名稱']}}</h1>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        基本情報
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">名称</p>
+        <p class="List-Item-Text">{{monster['_名稱']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">レベル</p>
+        <p class="List-Item-Text">{{monster['_等級']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">陣営</p>
+        <p class="List-Item-Text">{{monster['_陣營']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">種族</p>
+        <p class="List-Item-Text">{{monster['_系別']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">図鑑</p>
+        <p class="List-Item-Text">{{monster['_圖鑑說明']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">地域</p>
+        <p class="List-Item-Text">{{monster['_出沒區域']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">ベース経験値</p>
+        <p class="List-Item-Text">{{monster['_經驗價值']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">クラス経験値</p>
+        <p class="List-Item-Text">{{monster['_職業經驗']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">移動速度</p>
+        <p class="List-Item-Text">{{monster['_移動速度']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">移動範囲</p>
+        <p class="List-Item-Text">{{monster['_移動範圍']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="monster['_熟練度']">
+        <p class="List-Item-Title">熟練度</p>
+        <p class="List-Item-Text">{{monster['_熟練度']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="monster['_王']">
+        <p class="List-Item-Title">BOSS</p>
+        <p class="List-Item-Text">有</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded *ngIf="items">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ドロップ
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" [routerLink]="'/item/'+item.id">
+        <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}</p>
+        <p class="List-Item-Text">{{item.description}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        スーテタス
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">HP</p>
+        <p class="List-Item-Text">{{monster['_HP']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">ATK</p>
+        <p class="List-Item-Text">{{monster['_攻擊']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="monster['_攻擊變數']">
+        <p class="List-Item-Title">攻撃変数</p>
+        <p class="List-Item-Text">{{monster['_攻擊變數']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">DEF</p>
+        <p class="List-Item-Text">{{monster['_防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">MATK</p>
+        <p class="List-Item-Text">{{monster['_魔攻']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">MDEF</p>
+        <p class="List-Item-Text">{{monster['_魔防']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">HIT</p>
+        <p class="List-Item-Text">{{monster['_命中']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">AVOID</p>
+        <p class="List-Item-Text">{{monster['_閃躲']}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        属性
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">無属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_無屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">火属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_火屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">水属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_水屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">風属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_風屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">地属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_地屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">光属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_光屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">闇属性攻撃</p>
+        <p class="List-Item-Text">{{monster['_闇屬攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">金銭攻撃</p>
+        <p class="List-Item-Text">{{monster['_金錢攻擊']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">無属性防御</p>
+        <p class="List-Item-Text">{{monster['_無屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">火属性防御</p>
+        <p class="List-Item-Text">{{monster['_火屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">水属性防御</p>
+        <p class="List-Item-Text">{{monster['_水屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">風属性防御</p>
+        <p class="List-Item-Text">{{monster['_風屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">地属性防御</p>
+        <p class="List-Item-Text">{{monster['_地屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">光属性防御</p>
+        <p class="List-Item-Text">{{monster['_光屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">闇属性防御</p>
+        <p class="List-Item-Text">{{monster['_闇屬防禦']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">金銭防御</p>
+        <p class="List-Item-Text">{{monster['_金錢防禦']}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        耐性
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">状態抵抗</p>
+        <p class="List-Item-Text">{{monster['_狀態抗性']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">毒耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫中毒'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">魅惑耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫媚惑'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">石化耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫石化'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">氷結耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫冰凍'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">スタン耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫暈眩'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">ノックバック耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫震退'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">硬直耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫僵直'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">恐怖耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫恐懼'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">沈黙耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫沉默'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">暗闇耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫目盲'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">呪い耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫詛咒'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">反射耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫反彈'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">魔法反射耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫魔法反彈'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">スロウ耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫緩速'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">脱力耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫攻擊緩慢'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">ステルス耐性</p>
+        <p class="List-Item-Text">{{monster['_免疫隱身'] ? '有' : '無'}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">精霊技耐性</p>
+        <p class="List-Item-Text">{{monster['_抵抗聖靈技'] ? '有' : '無'}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>
