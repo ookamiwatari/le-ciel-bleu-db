@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemComponent } from './item/item.component';
+import { DropListComponent } from './drop-list/drop-list.component';
 
 
 
@@ -19,6 +20,7 @@ import { ItemComponent } from './item/item.component';
     AppComponent,
     ItemListComponent,
     ItemComponent,
+    DropListComponent,
   ],
   imports: [
     BrowserModule,
