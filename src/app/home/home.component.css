@@ -1,0 +1,16 @@
+.content {
+  margin: 5vw !important;
+}
+
+mat-card {
+  cursor: pointer;
+  outline: none;
+}
+
+.unimplemented {
+  cursor: not-allowed;
+}
+
+mat-card-content {
+  margin-bottom: 0;
+}

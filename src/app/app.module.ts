@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { HomeComponent } from './home/home.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemComponent } from './item/item.component';
 import { DropListComponent } from './drop-list/drop-list.component';
@@ -20,6 +21,7 @@ import { MonsterComponent } from './monster/monster.component';
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     ItemListComponent,
     ItemComponent,
     DropListComponent,
