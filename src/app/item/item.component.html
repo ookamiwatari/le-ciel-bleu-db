@@ -66,6 +66,10 @@
             <p class="List-Item-Title">ドロップ</p>
             <p class="List-Item-Text">{{drop.data['_名稱']}} Lv{{drop.data['_等級']}}</p>
         </div>
+        <div class="List-Item" style="cursor: pointer" *ngIf="drop.type === 'drop'" [routerLink]="['/' + drop.type, drop.data['_編號']]">
+            <p class="List-Item-Title">箱</p>
+            <p class="List-Item-Text">{{drop.data['_怪物名稱']}}</p>
+        </div>
       </ng-container>
     </div>
   </mat-expansion-panel>

@@ -34,6 +34,7 @@ export class DropListComponent implements AfterViewInit {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
     this.liteItemList = itemList.root['道具'].map((item: any) => { return { id: item['_編號'], name: item['_基本名稱'] } });
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
   }
 
   ngAfterViewInit() {

@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { ItemListComponent } from './item-list/item-list.component';
 import { ItemComponent } from './item/item.component';
 import { DropListComponent } from './drop-list/drop-list.component';
+import { DropComponent } from './drop/drop.component';
 import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterComponent } from './monster/monster.component';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'item', component: ItemListComponent },
   { path: 'item/:id', component: ItemComponent },
   { path: 'drop', component: DropListComponent },
+  { path: 'drop/:id', component: DropComponent },
   { path: 'monster', component: MonsterListComponent },
   { path: 'monster/:id', component: MonsterComponent },
   { path: 'home', component: HomeComponent },
@@ -20,9 +22,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    useHash: true,
-    scrollPositionRestoration: 'enabled',
-    anchorScrolling: 'enabled',
+    useHash: true
   })],
   exports: [RouterModule]
 })

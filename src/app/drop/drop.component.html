@@ -1,0 +1,37 @@
+<h1 style="margin: 3vw 3vw 0 3vw">{{drop['_基本名稱']}}</h1>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        基本情報
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">名称</p>
+        <p class="List-Item-Text">{{drop['_怪物名稱']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">個数</p>
+        <p class="List-Item-Text">{{drop['_個數']}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded *ngIf="items">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ドロップ
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <ng-container *ngFor="let item of items">
+        <div class="List-Item" style="cursor: pointer" [routerLink]="'/item' + (item.id ? '/' + item.id : '')">
+            <p class="List-Item-Title">{{item.name}} {{item.count !== '0' ? 'x' + item.count : ''}}</p>
+            <p class="List-Item-Text"> {{item.description}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>

@@ -28,7 +28,9 @@ export class MonsterComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute
-  ) { }
+  ) {
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
+  }
 
   ngOnInit () {
     const id = this.route.snapshot.paramMap.get('id');
@@ -44,25 +46,22 @@ export class MonsterComponent implements OnInit {
     }
     this.items = drops.map((d: any) => {
       let item = itemList.root['道具'].find((item) => item['_編號'] === d.id);
-      if (!item) {
-        if (d.id === '2224') item = { '_基本名稱': '焼きカボチャの種' , '_說明定義': '未実装' };
-        if (d.id === '2225') item = { '_基本名稱': 'りんご飴' , '_說明定義': '未実装' };
-        if (7000 < +d.id && +d.id < 7209) item = { '_基本名稱': 'ペットスキルカード' + d.id , '_說明定義': '未実装' };
-        if (10701 < +d.id && +d.id < 10750) item = { '_基本名稱': 'レヴェイエ' + d.id , '_說明定義': '未実装' };
-        if (31251 < +d.id && +d.id < 31287) item = { '_基本名稱': '本国用アイテム' + d.id , '_說明定義': '未実装' };
-        if (d.id === '10857') item = { '_基本名稱': 'アシストメダル' , '_說明定義': '未実装' };
-        if (d.id === '20061') item = { '_基本名稱': '翡翠魂魄' , '_說明定義': '未実装' };
-        if (d.id === '20062') item = { '_基本名稱': '淡紅魂魄' , '_說明定義': '未実装' };
-        if (d.id === '20063') item = { '_基本名稱': '青藍魂魄' , '_說明定義': '未実装' };
-        if (d.id === '20064') item = { '_基本名稱': '黄色魂魄' , '_說明定義': '未実装' };
-        if (d.id === '20065') item = { '_基本名稱': '紫烏魂魄' , '_說明定義': '未実装' };
+      if (item) {
+        return { id: d.id, name: item['_基本名稱'], count: d.count, description: item['_說明定義'] };
+      } else {
+        if (d.id === '2224') return { name: '焼きカボチャの種', count: d.count, description: '未実装' }
+        if (d.id === '2225') return { name: 'りんご飴', count: d.count, description: '未実装' }
+        if (7000 < +d.id && +d.id < 7209) return { name: 'ペットスキルカード' + d.id, count: d.count, description: '未実装' }
+        if (10701 < +d.id && +d.id < 10750) return { name: 'レヴェイエ' + d.id, count: d.count, description: '未実装' }
+        if (31251 < +d.id && +d.id < 31287) return { name: '本国用アイテム' + d.id, count: d.count, description: '未実装' }
+        if (d.id === '10857') return { name: 'アシストメダル', count: d.count, description: '未実装' }
+        if (d.id === '20061') return { name: '翡翠魂魄', count: d.count, description: '未実装' }
+        if (d.id === '20062') return { name: '淡紅魂魄', count: d.count, description: '未実装' }
+        if (d.id === '20063') return { name: '青藍魂魄', count: d.count, description: '未実装' }
+        if (d.id === '20064') return { name: '黄色魂魄', count: d.count, description: '未実装' }
+        if (d.id === '20065') return { name: '紫烏魂魄', count: d.count, description: '未実装' }
+        return {};
       }
-      return {
-        id: d.id,
-        name: item['_基本名稱'],
-        count: d.count,
-        description:item['_說明定義']
-      };
     })
   }
 

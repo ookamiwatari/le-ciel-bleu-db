@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import itemList from '../../assets/json/item.json';
 import dropList from '../../assets/json/drop.json';
@@ -28,8 +28,11 @@ export class ItemComponent implements OnInit {
   drops: any;
 
   constructor(
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
+  }
 
   ngOnInit () {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -42,8 +45,8 @@ export class ItemComponent implements OnInit {
       return false;
     }).map((drop: any) => {
       const monster = monsterList.root.npc.find((monster: any) => { return monster['_編號'] === drop['_編號']});
-      if (monster) return { type: 'monster', data: monster };
-      return { type: 'item', data: drop };
+      if (!monster || +drop['_編號'] > 4213 ) return { type: 'drop', data: drop }
+      return { type: 'monster', data: monster };
     });
     console.log('drops', this.drops);
   }

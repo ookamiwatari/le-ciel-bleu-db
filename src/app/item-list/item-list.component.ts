@@ -30,11 +30,12 @@ export class ItemListComponent implements AfterViewInit {
   constructor() {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
   }
 
   ngAfterViewInit() {
     const datas = itemList.root['道具'].filter((item: any) => {
-      return typeof item !== 'string'
+      return typeof item !== 'string' && item['_基本名稱']
     }).map((item: any) => {
       let addDescription = '';
       if (item['_物品類別'] === '寶石') {

@@ -1,0 +1,62 @@
+import { OnInit, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import itemList from '../../assets/json/item.json';
+import dropList from '../../assets/json/drop.json';
+
+
+export interface ItemData {
+  id: number;
+  name: string;
+  type: string
+  description: string;
+}
+
+/**
+ * @title Data table with sorting, pagination, and filtering.
+ */
+@Component({
+  selector: 'drop',
+  styleUrls: ['drop.component.css'],
+  templateUrl: 'drop.component.html',
+})
+export class DropComponent implements OnInit {
+
+  id: any;
+  items: any = [];
+  drop: any;
+
+  constructor(
+    private route: ActivatedRoute
+  ) {
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
+  }
+
+  ngOnInit () {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.drop = dropList.root.drop.find((drop: any) => drop['_編號'] === this.id);
+    for (let i = 1; i <= 40; i++) {
+      const id = this.drop['_item'+i];
+      if (!id) continue;
+      const count = this.drop['_count'+1];
+      const item = itemList.root['道具'].find((item: any) => { return item['_編號'] === id; });
+      if (item) {
+        this.items.push({ id: item['_編號'], name: item['_基本名稱'], count: count, description: item['_說明定義']});
+      } else {
+        if (id === '2224') this.items.push({ name: '焼きカボチャの種', count: count, description: '未実装'});
+        if (id === '2225') this.items.push({ name: 'りんご飴', count: count, description: '未実装'});
+        if (7000 < +id && +id < 7209) this.items.push({ name: 'ペットスキルカード', count: count, description: '未実装'});
+        if (10701 < +id && +id < 10750) this.items.push({ name: 'レヴェイエ', count: count, description: '未実装'});
+        if (31251 < +id && +id < 31287) this.items.push({ name: '本国用アイテム', count: count, description: '未実装'});
+        if (id === '10857') this.items.push({ name: 'アシストメダル', count: count, description: '未実装'});
+        if (id === '20061') this.items.push({ name: '翡翠魂魄', count: count, description: '未実装'});
+        if (id === '20062') this.items.push({ name: '淡紅魂魄', count: count, description: '未実装'});
+        if (id === '20063') this.items.push({ name: '青藍魂魄', count: count, description: '未実装'});
+        if (id === '20064') this.items.push({ name: '黄色魂魄', count: count, description: '未実装'});
+        if (id === '20065') this.items.push({ name: '紫烏魂魄', count: count, description: '未実装'});
+      }
+    }
+    console.log('items', this.items);
+  }
+
+}

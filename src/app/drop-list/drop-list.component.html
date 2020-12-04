@@ -10,7 +10,7 @@
       <mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
       <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row">
          {{row.id}}
-         <a fxFlexFill [routerLink]="'/monster/'+row.id" class="mat-row-link"></a>
+         <a fxFlexFill [routerLink]="+row.id < 4214 ? '/monster/'+row.id : '/drop/'+row.id" class="mat-row-link"></a>
        </mat-cell>
     </ng-container>
 

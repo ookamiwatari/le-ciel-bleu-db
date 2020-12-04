@@ -65,7 +65,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="List">
-      <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" [routerLink]="'/item/'+item.id">
+      <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" [routerLink]="item.id ? '/item/'+item.id : '/item'">
         <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}</p>
         <p class="List-Item-Text">{{item.description}}</p>
       </div>

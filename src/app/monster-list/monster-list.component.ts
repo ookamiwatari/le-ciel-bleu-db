@@ -30,6 +30,7 @@ export class MonsterListComponent implements AfterViewInit {
   constructor() {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
   }
 
   ngAfterViewInit() {
