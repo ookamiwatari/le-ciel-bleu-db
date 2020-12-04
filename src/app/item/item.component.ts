@@ -1,7 +1,10 @@
-import { AfterViewInit, OnInit, Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import itemList from '../../assets/json/item.json';
+import dropList from '../../assets/json/drop.json';
+import monsterList from '../../assets/json/monster.json';
+
 
 export interface ItemData {
   id: number;
@@ -20,16 +23,29 @@ export interface ItemData {
 })
 export class ItemComponent implements OnInit {
 
+  id: any;
   item: any;
+  drops: any;
 
   constructor(
     private route: ActivatedRoute
   ) { }
 
   ngOnInit () {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.item = itemList.root['道具'].find((item: any) => { return item['_編號'] === id; })
-    console.log('item', this.item);
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.item = itemList.root['道具'].find((item: any) => { return item['_編號'] === this.id; });
+    this.drops = dropList.root.drop.filter((drop: any) => {
+      for (let i = 1; i <= 40; i++) {
+        const d = drop['_item'+i];
+        if (d && d === this.id) return true;
+      }
+      return false;
+    }).map((drop: any) => {
+      const monster = monsterList.root.npc.find((monster: any) => { return monster['_編號'] === drop['_編號']});
+      if (monster) return { type: 'monster', data: monster };
+      return { type: 'item', data: drop };
+    });
+    console.log('drops', this.drops);
   }
 
 }

@@ -54,6 +54,22 @@
     </div>
   </mat-expansion-panel>
 
+  <mat-expansion-panel expanded *ngIf="drops">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        ドロップ
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <ng-container *ngFor="let drop of drops">
+        <div class="List-Item" style="cursor: pointer" *ngIf="drop.type === 'monster'" [routerLink]="['/' + drop.type, drop.data['_編號']]">
+            <p class="List-Item-Title">ドロップ</p>
+            <p class="List-Item-Text">{{drop.data['_名稱']}} Lv{{drop.data['_等級']}}</p>
+        </div>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
+
 
   <mat-expansion-panel expanded *ngIf="item && item['_無組合變化']">
     <mat-expansion-panel-header>

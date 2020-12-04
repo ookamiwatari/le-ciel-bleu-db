@@ -72,6 +72,17 @@ export class DropListComponent implements AfterViewInit {
       if (drop['_item'+i]) drops.push({ id: drop['_item'+i], count: drop['_count'+i]});
     }
     return drops.map((d) => {
+      if (d.id === '2224') return '焼きカボチャの種(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '2225') return 'りんご飴(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (7000 < +d.id && +d.id < 7209) return 'ペットスキルカード' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (10701 < +d.id && +d.id < 10750) return 'レヴェイエ' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (31251 < +d.id && +d.id < 31287) return '本国用アイテム' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '10857') return 'アシストメダル(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20061') return '翡翠魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20062') return '淡紅魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20063') return '青藍魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20064') return '黄色魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20065') return '紫烏魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       return this.liteItemList.find((i) => i.id === d.id).name + (d.count !== '1' ? 'x' + d.count : '');
     }).join(', ');
 
