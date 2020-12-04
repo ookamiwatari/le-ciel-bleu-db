@@ -38,7 +38,7 @@ export class DropComponent implements OnInit {
     for (let i = 1; i <= 40; i++) {
       const id = this.drop['_item'+i];
       if (!id) continue;
-      const count = this.drop['_count'+1];
+      const count = this.drop['_count'+i];
       const item = itemList.root['道具'].find((item: any) => { return item['_編號'] === id; });
       if (item) {
         this.items.push({ id: item['_編號'], name: item['_基本名稱'], count: count, description: item['_說明定義']});
