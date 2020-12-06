@@ -8,6 +8,8 @@ import { DropListComponent } from './drop-list/drop-list.component';
 import { DropComponent } from './drop/drop.component';
 import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterComponent } from './monster/monster.component';
+import { MagicListComponent } from './magic-list/magic-list.component';
+import { MagicComponent } from './magic/magic.component';
 
 const routes: Routes = [
   { path: 'item', component: ItemListComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'drop/:id', component: DropComponent },
   { path: 'monster', component: MonsterListComponent },
   { path: 'monster/:id', component: MonsterComponent },
+  { path: 'magic', component: MagicListComponent },
+  { path: 'magic/:id', component: MagicComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
 ];

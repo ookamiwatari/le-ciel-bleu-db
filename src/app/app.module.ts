@@ -16,7 +16,8 @@ import { DropListComponent } from './drop-list/drop-list.component';
 import { DropComponent } from './drop/drop.component';
 import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterComponent } from './monster/monster.component';
-
+import { MagicListComponent } from './magic-list/magic-list.component';
+import { MagicComponent } from './magic/magic.component';
 
 
 @NgModule({
@@ -29,6 +30,8 @@ import { MonsterComponent } from './monster/monster.component';
     DropComponent,
     MonsterListComponent,
     MonsterComponent,
+    MagicListComponent,
+    MagicComponent,
   ],
   imports: [
     BrowserModule,

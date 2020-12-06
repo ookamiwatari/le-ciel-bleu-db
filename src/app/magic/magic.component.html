@@ -1,0 +1,76 @@
+<h1 style="margin: 3vw 3vw 0 3vw">{{magic['_基本名稱']}}</h1>
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        基本情報
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">名称</p>
+        <p class="List-Item-Text">{{magic['_名稱']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">説明</p>
+        <p class="List-Item-Text">{{magic['_說明']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">対象</p>
+        <p class="List-Item-Text">{{magic['_對象']}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">種類</p>
+        <p class="List-Item-Text">{{magic['_被動技能'] ? 'パッシブ' : 'アクティブ'}}</p>
+      </div>
+      <div class="List-Item" *ngIf="magic['_後置時間']">
+        <p class="List-Item-Title">クールタイム</p>
+        <p class="List-Item-Text">{{magic['_後置時間']}}ms</p>
+      </div>
+      <div class="List-Item" *ngIf="magic['_消耗MP']">
+        <p class="List-Item-Title">消費MP</p>
+        <p class="List-Item-Text">{{magic['_消耗MP']}}</p>
+      </div>
+      <div class="List-Item" *ngIf="magic['_動作時間']">
+        <p class="List-Item-Title">動作時間</p>
+        <p class="List-Item-Text">{{magic['_動作時間']}}ms</p>
+      </div>
+      <div class="List-Item" *ngIf="magic['_命中時間']">
+        <p class="List-Item-Title">命中時間</p>
+        <p class="List-Item-Text">{{magic['_命中時間']}}ms</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-expansion-panel expanded *ngIf="items.length">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      アイテム
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="List">
+    <ng-container *ngFor="let item of items">
+      <div class="List-Item" style="cursor: pointer" [routerLink]="['/item', item['_編號']]">
+          <p class="List-Item-Title">{{item['_基本名稱']}}</p>
+          <p class="List-Item-Text">{{item['_說明定義']}}</p>
+      </div>
+    </ng-container>
+  </div>
+</mat-expansion-panel>
+
+<mat-expansion-panel expanded *ngIf="monsters.length">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      モンスター
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div class="List">
+    <ng-container *ngFor="let monster of monsters">
+      <div class="List-Item" style="cursor: pointer" [routerLink]="['/monster', monster['_編號']]">
+          <p class="List-Item-Title">{{monster['_名稱']}}</p>
+          <p class="List-Item-Text">{{monster['_圖鑑說明']}}</p>
+      </div>
+    </ng-container>
+  </div>
+</mat-expansion-panel>
