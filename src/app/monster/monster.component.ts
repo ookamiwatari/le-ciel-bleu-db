@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import itemList from '../../assets/json/item.json';
 import dropList from '../../assets/json/drop.json';
+import servDropList from '../../assets/json/serv_drop.json';
 import monsterList from '../../assets/json/monster.json';
 
 export interface ItemData {
@@ -23,8 +24,11 @@ export interface ItemData {
 })
 export class MonsterComponent implements OnInit {
 
-  items: any;
+  items: any = [];
+  prob!: number;
+  adv_items: any = [];
   monster: any;
+  drop_count!: number;
 
   constructor(
     private route: ActivatedRoute
@@ -33,36 +37,77 @@ export class MonsterComponent implements OnInit {
   }
 
   ngOnInit () {
-    const id = this.route.snapshot.paramMap.get('id');
+    const id: any = this.route.snapshot.paramMap.get('id');
     this.monster = monsterList.root.npc.find((item: any) => { return item['_編號'] === id; });
     if (!this.monster) return;
-    const drop: any = dropList.root.drop.find((d: any) => {
-      return d['_編號'] === this.monster['_編號'];
-    });
-    if( !drop || !id || +id > 4214) return;
-    const drops = [];
-    for (let i = 1; i <= 40; i++) {
-      if (drop['_item'+i]) drops.push({ id: drop['_item'+i], count: drop['_count'+i]});
+    let drop: any;
+    if (this.isMatchServeDrop(id)) {
+      drop = servDropList.root.drop.find((d: any) => d['_編號'] === id);
+    } else {
+      drop = dropList.root.drop.find((d: any) => d['_編號'] === id);
     }
-    this.items = drops.map((d: any) => {
-      let item = itemList.root['道具'].find((item) => item['_編號'] === d.id);
+    if( !drop || !id || +id > 4214) return;
+    const factor = +drop['_factor'];
+    const adv_factor = +drop['_adv_factor'];
+    this.drop_count = +drop['_個數'];
+    let sum_prob = 0;
+    for (let i = 1; i <= 20; i++) {
+      const id = drop['_item'+i];
+      if (!id) continue;
+      const item = itemList.root['道具'].find((item: any) => { return item['_編號'] === id; });
+      const count = drop['_count'+i];
+      const prob = +drop['_prob'+i];
+      sum_prob += prob;
       if (item) {
-        return { id: d.id, name: item['_基本名稱'], count: d.count, description: item['_說明定義'] };
+        this.items.push({ id: id, name: item['_基本名稱'], count: count, description: item['_說明定義'], prob: factor && prob ? prob * 100 / factor : undefined });
       } else {
-        if (d.id === '2224') return { name: '焼きカボチャの種', count: d.count, description: '未実装' }
-        if (d.id === '2225') return { name: 'りんご飴', count: d.count, description: '未実装' }
-        if (7000 < +d.id && +d.id < 7209) return { name: 'ペットスキルカード' + d.id, count: d.count, description: '未実装' }
-        if (10701 < +d.id && +d.id < 10750) return { name: 'レヴェイエ' + d.id, count: d.count, description: '未実装' }
-        if (31251 < +d.id && +d.id < 31287) return { name: '本国用アイテム' + d.id, count: d.count, description: '未実装' }
-        if (d.id === '10857') return { name: 'アシストメダル', count: d.count, description: '未実装' }
-        if (d.id === '20061') return { name: '翡翠魂魄', count: d.count, description: '未実装' }
-        if (d.id === '20062') return { name: '淡紅魂魄', count: d.count, description: '未実装' }
-        if (d.id === '20063') return { name: '青藍魂魄', count: d.count, description: '未実装' }
-        if (d.id === '20064') return { name: '黄色魂魄', count: d.count, description: '未実装' }
-        if (d.id === '20065') return { name: '紫烏魂魄', count: d.count, description: '未実装' }
-        return {};
+        if (id === '2224') this.items.push({ name: '焼きカボチャの種', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '2225') this.items.push({ name: 'りんご飴', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (7000 < +id && +id < 7209) this.items.push({ name: 'ペットスキルカード' +id, count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (10701 < +id && +id < 10750) this.items.push({ name: 'レヴェイエ' +id, count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (31251 < +id && +id < 31287) this.items.push({ name: '本国用アイテム' +id, count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '10857') this.items.push({ name: 'アシストメダル', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '20061') this.items.push({ name: '翡翠魂魄', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '20062') this.items.push({ name: '淡紅魂魄', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '20063') this.items.push({ name: '青藍魂魄', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '20064') this.items.push({ name: '黄色魂魄', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
+        if (id === '20065') this.items.push({ name: '紫烏魂魄', count:count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined });
       }
-    })
+    }
+    this.prob = sum_prob * 100 / factor;
+    for (let i = 21; i <= 40; i++) {
+      const id = drop['_item'+i];
+      if (!id) continue;
+      const item = itemList.root['道具'].find((item: any) => { return item['_編號'] === id; });
+      const count = drop['_count'+i];
+      const prob = +drop['_prob'+i];
+      if (item) {
+        this.adv_items.push({ id: item['_編號'], name: item['_基本名稱'], count: count, description: item['_說明定義'], prob: adv_factor && prob ? prob * 100 / adv_factor : undefined });
+      } else {
+        if (id === '2224') this.adv_items.push({ name: '焼きカボチャの種', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '2225') this.adv_items.push({ name: 'りんご飴', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (7000 < +id && +id < 7209) this.adv_items.push({ name: 'ペットスキルカード', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (10701 < +id && +id < 10750) this.adv_items.push({ name: 'レヴェイエ', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (31251 < +id && +id < 31287) this.adv_items.push({ name: '本国用アイテム', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '10857') this.adv_items.push({ name: 'アシストメダル', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '20061') this.adv_items.push({ name: '翡翠魂魄', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '20062') this.adv_items.push({ name: '淡紅魂魄', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '20063') this.adv_items.push({ name: '青藍魂魄', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '20064') this.adv_items.push({ name: '黄色魂魄', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+        if (id === '20065') this.adv_items.push({ name: '紫烏魂魄', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined});
+      }
+
+    }
+  }
+
+  isMatchServeDrop (id: number) {
+    const drop = dropList.root.drop.find((drop: any) => drop['_編號'] === id);
+    const serv_drop = servDropList.root.drop.find((drop: any) => drop['_編號'] === id);
+    for (let i = 1; i <= 40; i++) {
+      if (drop['_item'+i] !== serv_drop['_item'+i]) return false;
+      if (drop['_count'+i] !== serv_drop['_count'+i]) return false;
+    }
+    return true;
   }
 
 }

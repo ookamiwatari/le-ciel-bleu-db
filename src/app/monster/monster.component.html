@@ -55,20 +55,40 @@
         <p class="List-Item-Title">BOSS</p>
         <p class="List-Item-Text">有</p>
       </div>
+      <div class="List-Item" *ngIf="drop_count">
+        <p class="List-Item-Title">ドロップ個数</p>
+        <p class="List-Item-Text">{{drop_count}}</p>
+      </div>
     </div>
   </mat-expansion-panel>
 
-  <mat-expansion-panel expanded *ngIf="items">
+  <mat-expansion-panel expanded *ngIf="items.length">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        ドロップ
+        基本ドロップ {{prob ? '(' + prob + '%)' : ''}}
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="List">
       <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" [routerLink]="item.id ? '/item/'+item.id : '/item'">
-        <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}</p>
+        <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
         <p class="List-Item-Text">{{item.description}}</p>
       </div>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel expanded *ngIf="adv_items.length">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        追加ドロップ
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <ng-container *ngFor="let item of adv_items">
+        <div class="List-Item" style="cursor: pointer" [routerLink]="'/item' + (item.id ? '/' + item.id : '')">
+            <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
+            <p class="List-Item-Text"> {{item.description}}</p>
+        </div>
+      </ng-container>
     </div>
   </mat-expansion-panel>
 
