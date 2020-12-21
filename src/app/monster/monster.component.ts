@@ -103,6 +103,7 @@ export class MonsterComponent implements OnInit {
   isMatchServeDrop (id: number) {
     const drop = dropList.root.drop.find((drop: any) => drop['_編號'] === id);
     const serv_drop = servDropList.root.drop.find((drop: any) => drop['_編號'] === id);
+    if (!drop || !serv_drop) return false;
     for (let i = 1; i <= 40; i++) {
       if (drop['_item'+i] !== serv_drop['_item'+i]) return false;
       if (drop['_count'+i] !== serv_drop['_count'+i]) return false;
