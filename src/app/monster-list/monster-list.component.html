@@ -3,43 +3,45 @@
   <input matInput (keyup)="applyFilter($event)" placeholder="ピヨン" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8" style="margin: 0 1.5vw;">
-  <table mat-table [dataSource]="dataSource" matSort>
+<div class="mat-elevation-z8" style="height: calc(100% - 90px); margin: 0 1.5vw;">
+  <div style="max-height: calc(100% - 56px); overflow: auto; position: relative;">
+    <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="id">
-      <mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-      <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row">
-         {{row.id}}
-       </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </th>
+        <td mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row">
+           {{row.id}}
+         </td>
+      </ng-container>
 
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> 名前 </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 名前 </th>
+        <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> 種族 </mat-header-cell>
-      <mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.type}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 種族 </th>
+        <td mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.type}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="lv">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> レベル </mat-header-cell>
-      <mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.lv}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="lv">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> レベル </th>
+        <td mat-cell style="word-break: keep-all;" *matCellDef="let row"> {{row.lv}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="description">
-      <mat-header-cell style="padding-right: 1.5vw;"  *matHeaderCellDef mat-sort-header> 説明 </mat-header-cell>
-      <mat-cell style="padding-right: 1.5vw;" *matCellDef="let row"> {{row.description}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell style="padding-right: 1.5vw;" *matHeaderCellDef mat-sort-header> 説明 </th>
+        <td mat-cell style="padding-right: 1.5vw;" *matCellDef="let row"> {{row.description}} </td>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickRow($event, row)" style="cursor: pointer;"></mat-row>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickRow($event, row)" style="cursor: pointer;"></tr>
 
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-  </table>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
 
+  </div>
   <mat-paginator [pageSize]="100" [pageSizeOptions]="[10, 100, 1000, 5000, 20000]"></mat-paginator>
 </div>
