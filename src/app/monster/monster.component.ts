@@ -114,7 +114,7 @@ export class MonsterComponent implements OnInit {
     return true;
   }
 
-  private clickItem(event: MouseEvent, item: any) {
+  clickItem(event: MouseEvent, item: any) {
     if (event.view?.getSelection()?.type !== 'Caret') return;
     this.router.navigate(['/item/' + item.id]);
   }

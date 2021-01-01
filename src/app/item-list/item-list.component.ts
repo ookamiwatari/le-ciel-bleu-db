@@ -86,7 +86,7 @@ export class ItemListComponent implements AfterViewInit {
     }
   }
 
-  private clickRow(event: MouseEvent, row: any) {
+  clickRow(event: MouseEvent, row: any) {
     if (event.view?.getSelection()?.type !== 'Caret') return;
     this.router.navigate(['/drop/' + row.id]);
   }

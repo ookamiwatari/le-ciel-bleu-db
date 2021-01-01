@@ -91,7 +91,7 @@ export class DropListComponent implements AfterViewInit {
     }).join(', ');
   }
 
-  private clickRow(event: MouseEvent, row: any) {
+  clickRow(event: MouseEvent, row: any) {
     if (event.view?.getSelection()?.type !== 'Caret') return;
     this.router.navigate(['/drop/' + row.id]);
   }
