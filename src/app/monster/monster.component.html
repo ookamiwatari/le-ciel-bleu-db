@@ -86,7 +86,7 @@
       <ng-container *ngFor="let item of adv_items">
         <div class="List-Item" style="cursor: pointer" [routerLink]="'/item' + (item.id ? '/' + item.id : '')">
             <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
-            <p class="List-Item-Text"> {{item.description}}</p>
+            <p class="List-Item-Text"> {{item.description}} ({{item.quest}})</p>
         </div>
       </ng-container>
     </div>
