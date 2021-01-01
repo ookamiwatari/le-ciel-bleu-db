@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -62,7 +63,9 @@ export class MagicListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
@@ -98,4 +101,8 @@ export class MagicListComponent implements AfterViewInit {
     }
   }
 
+  private clickRow(event: MouseEvent, row: any) {
+    if (event.view?.getSelection()?.type !== 'Caret') return;
+    this.router.navigate(['/drop/' + row.id]);
+  }
 }

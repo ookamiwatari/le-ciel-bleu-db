@@ -1,4 +1,5 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -30,7 +31,9 @@ export class DropListComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
     this.liteItemList = itemList.root['道具'].map((item: any) => { return { id: item['_編號'], name: item['_基本名稱'] } });
@@ -86,6 +89,10 @@ export class DropListComponent implements AfterViewInit {
       if (d.id === '20065') return '紫烏魂魄(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       return this.liteItemList.find((i) => i.id === d.id).name + (d.count !== '1' ? 'x' + d.count : '');
     }).join(', ');
+  }
 
+  private clickRow(event: MouseEvent, row: any) {
+    if (event.view?.getSelection()?.type !== 'Caret') return;
+    this.router.navigate(['/drop/' + row.id]);
   }
 }

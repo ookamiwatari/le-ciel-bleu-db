@@ -10,7 +10,6 @@
       <mat-header-cell style="padding-left: 2vw;" *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
       <mat-cell style="word-break: keep-all; padding-left: 2vw;" *matCellDef="let row">
          {{row.id}}
-         <a fxFlexFill [routerLink]="'/monster/'+row.id" class="mat-row-link"></a>
        </mat-cell>
     </ng-container>
 
@@ -35,7 +34,7 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickRow($event, row)" style="cursor: pointer;"></mat-row>
 
     <tr class="mat-row" *matNoDataRow>
       <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
