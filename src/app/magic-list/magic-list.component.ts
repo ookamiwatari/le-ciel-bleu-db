@@ -103,6 +103,6 @@ export class MagicListComponent implements AfterViewInit {
 
   clickRow(event: MouseEvent, row: any) {
     if (event.view?.getSelection()?.type !== 'Caret') return;
-    this.router.navigate(['/drop/' + row.id]);
+    this.router.navigate(['/magic/' + row.id]);
   }
 }
