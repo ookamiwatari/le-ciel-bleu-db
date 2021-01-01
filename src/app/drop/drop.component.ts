@@ -1,5 +1,5 @@
 import { OnInit, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import itemList from '../../assets/json/item.json';
 import dropList from '../../assets/json/drop.json';
@@ -31,6 +31,7 @@ export class DropComponent implements OnInit {
   drop: any;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute
   ) {
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
@@ -107,4 +108,8 @@ export class DropComponent implements OnInit {
     return true;
   }
 
+  private clickItem(event: MouseEvent, item: any) {
+    if (event.view?.getSelection()?.type !== 'Caret') return;
+    this.router.navigate(['/item/' + item.id]);
+  }
 }

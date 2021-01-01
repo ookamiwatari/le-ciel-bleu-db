@@ -69,7 +69,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="List">
-      <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" [routerLink]="item.id ? '/item/'+item.id : '/item'">
+      <div class="List-Item" style="cursor: pointer" *ngFor="let item of items" (click)="clickItem($event, item);">
         <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
         <p class="List-Item-Text">{{item.description}}</p>
       </div>
@@ -84,7 +84,7 @@
     </mat-expansion-panel-header>
     <div class="List">
       <ng-container *ngFor="let item of adv_items">
-        <div class="List-Item" style="cursor: pointer" [routerLink]="'/item' + (item.id ? '/' + item.id : '')">
+        <div class="List-Item" style="cursor: pointer" (click)="clickItem($event, item);">
             <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
             <p class="List-Item-Text"> {{item.description}} ({{item.quest}})</p>
         </div>
