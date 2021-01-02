@@ -49,7 +49,7 @@ export class DropListComponent implements AfterViewInit {
       });
       return {
         id: drop['_編號'],
-        name: monster && monster['_名稱'] ? monster['_名稱'] : drop['_怪物名稱'],
+        name: +drop['_編號'] < 4214 && monster && monster['_名稱'] ? monster['_名稱'] : drop['_怪物名稱'],
         count: drop['_個數'],
         description: this.generateDropTxt(drop)
       }
