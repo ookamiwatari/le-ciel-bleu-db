@@ -7,6 +7,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import itemList from '../../assets/json/item.json';
 import dropList from '../../assets/json/drop.json';
 import monsterList from '../../assets/json/monster.json';
+import pickupList from '../../assets/json/pickup.json';
 
 export interface DropData {
   id: number;
@@ -26,6 +27,9 @@ export interface DropData {
 export class DropListComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'count', 'description'];
   dataSource: MatTableDataSource<DropData>;
+  input: string = '';
+  pickups: any;
+  pickup: string = '';
   liteItemList: any[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,8 +40,9 @@ export class DropListComponent implements AfterViewInit {
   ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
-    this.liteItemList = itemList.root['道具'].map((item: any) => { return { id: item['_編號'], name: item['_基本名稱'] } });
+    this.pickups = pickupList.drops;
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
+    this.liteItemList = itemList.root['道具'].map((item: any) => { return { id: item['_編號'], name: item['_基本名稱'] } });
   }
 
   ngAfterViewInit() {
@@ -51,7 +56,8 @@ export class DropListComponent implements AfterViewInit {
         id: drop['_編號'],
         name: +drop['_編號'] < 4214 && monster && monster['_名稱'] ? monster['_名稱'] : drop['_怪物名稱'],
         count: drop['_個數'],
-        description: this.generateDropTxt(drop)
+        description: this.generateDropTxt(drop),
+        memo: pickupList.drops.filter((pickup) => pickup.ids.find(id => id === +drop['_編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {
@@ -61,10 +67,9 @@ export class DropListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter() {
+    const filterValue = this.pickup !== '' ?  this.pickup : this.input;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

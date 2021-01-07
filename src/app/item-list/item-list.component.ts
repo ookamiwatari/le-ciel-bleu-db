@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 import itemList from '../../assets/json/item.json';
+import pickupList from '../../assets/json/pickup.json';
 
 export interface ItemData {
   id: number;
@@ -24,6 +25,10 @@ export interface ItemData {
 export class ItemListComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'type', 'description'];
   dataSource: MatTableDataSource<ItemData>;
+  input: string = '';
+  pickups: any;
+  pickup: string = '';
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,6 +38,7 @@ export class ItemListComponent implements AfterViewInit {
   ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+    this.pickups = pickupList.items;
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
   }
 
@@ -67,7 +73,8 @@ export class ItemListComponent implements AfterViewInit {
         id: item['_編號'],
         name: item['_基本名稱'],
         type: item['_物品類別'],
-        description: item['_說明定義'] ? addDescription + item['_說明定義'] : ''
+        description: item['_說明定義'] ? addDescription + item['_說明定義'] : '',
+        memo: pickupList.items.filter((pickup) => pickup.ids.find(id => id === +item['_編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {
@@ -77,10 +84,9 @@ export class ItemListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter() {
+    const filterValue = this.pickup !== '' ?  this.pickup : this.input;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

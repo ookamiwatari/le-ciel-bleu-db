@@ -5,6 +5,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 
 import magicList from '../../assets/json/magic.json';
+import pickupList from '../../assets/json/pickup.json';
 
 export interface MagicData {
   id: number;
@@ -59,6 +60,10 @@ const classes: any = {
 export class MagicListComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'class', 'description'];
   dataSource: MatTableDataSource<MagicData>;
+  input: string = '';
+  pickups: any;
+  pickup: string = '';
+
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -68,6 +73,7 @@ export class MagicListComponent implements AfterViewInit {
   ) {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource();
+    this.pickups = pickupList.magics;
     document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
   }
 
@@ -82,7 +88,8 @@ export class MagicListComponent implements AfterViewInit {
         id: magic['_編號'],
         name: magic['_名稱'],
         class: class_string,
-        description: magic['_說明']
+        description: magic['_說明'],
+        memo: pickupList.magics.filter((pickup) => pickup.ids.find(id => id === +magic['_編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {
@@ -92,10 +99,9 @@ export class MagicListComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter() {
+    const filterValue = this.pickup !== '' ?  this.pickup : this.input;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

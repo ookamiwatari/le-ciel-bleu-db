@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from './material.module';
 
@@ -34,6 +34,7 @@ import { MagicComponent } from './magic/magic.component';
     MagicComponent,
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     FlexLayoutModule,
     ReactiveFormsModule,
