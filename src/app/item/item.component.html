@@ -74,6 +74,25 @@
     </div>
   </mat-expansion-panel>
 
+  <mat-expansion-panel expanded *ngIf="infos">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        使用クエスト
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <ng-container *ngFor="let info of infos">
+        <ng-container *ngFor="let step of info.steps">
+          <ng-container *ngFor="let quest of step">
+            <div class="List-Item" style="cursor: pointer" [routerLink]="['/quest', quest['_編號']]">
+                <p class="List-Item-Title" style="text-align: center;">{{info.count}}個</p>
+                <p class="List-Item-Text">{{quest['_任務名稱']}}{{quest['_任務評價'] ? ' L.EXP' + quest['_任務評價'] : ''}}</p>
+            </div>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+    </div>
+  </mat-expansion-panel>
 
   <mat-expansion-panel expanded *ngIf="item && item['_無組合變化']">
     <mat-expansion-panel-header>
