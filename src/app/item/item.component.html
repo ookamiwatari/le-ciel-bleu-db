@@ -86,7 +86,7 @@
           <ng-container *ngFor="let quest of step">
             <div class="List-Item" style="cursor: pointer" [routerLink]="['/quest', quest['_編號']]">
                 <p class="List-Item-Title" style="text-align: center;">{{info.count}}個</p>
-                <p class="List-Item-Text">{{quest['_任務名稱']}}{{quest['_任務評價'] ? ' L.EXP' + quest['_任務評價'] : ''}}</p>
+                <p class="List-Item-Text">{{quest['_任務名稱']}}{{+quest['_任務評價'] ? ' L.EXP' + quest['_任務評價'] : ''}}</p>
             </div>
           </ng-container>
         </ng-container>

@@ -47,12 +47,14 @@ export class QuestListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const datas = questList.root['任務'].map((quest: any) => {
+      const premise1 = questList.root['任務'].find((_quest) => _quest['_編號'] === quest['_前置任務'])['_任務名稱'];
+      const premise2 = questList.root['任務'].find((_quest) => _quest['_編號'] === quest['_前置任務2'])['_任務名稱'];
       return {
         id: quest['_編號'],
         name: quest['_任務名稱'],
         lv: quest['_等級限制'],
         lexp: quest['_任務評價'],
-        premise: questList.root['任務'].find((_quest) => _quest['_編號'] === quest['_前置任務'])['_任務名稱'],
+        premise: (premise1 ? premise1 : '') + (premise2 ? ', ' + premise2 : ''),
         infos: this.getQuestInfos(quest),
         memo: pickupList.quests.filter((pickup) => pickup.ids.find(id => id === +quest['_編號'])).map(pickup => pickup.version).join(', ')
       }
