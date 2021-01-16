@@ -10,6 +10,7 @@ import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterComponent } from './monster/monster.component';
 import { MagicListComponent } from './magic-list/magic-list.component';
 import { MagicComponent } from './magic/magic.component';
+import { QuestListComponent } from './quest-list/quest-list.component';
 
 const routes: Routes = [
   { path: 'item', component: ItemListComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'monster/:id', component: MonsterComponent },
   { path: 'magic', component: MagicListComponent },
   { path: 'magic/:id', component: MagicComponent },
+  { path: 'quest', component: QuestListComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
 ];

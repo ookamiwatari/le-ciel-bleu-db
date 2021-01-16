@@ -18,6 +18,7 @@ import { MonsterListComponent } from './monster-list/monster-list.component';
 import { MonsterComponent } from './monster/monster.component';
 import { MagicListComponent } from './magic-list/magic-list.component';
 import { MagicComponent } from './magic/magic.component';
+import { QuestListComponent } from './quest-list/quest-list.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MagicComponent } from './magic/magic.component';
     MonsterComponent,
     MagicListComponent,
     MagicComponent,
+    QuestListComponent,
   ],
   imports: [
     FormsModule,
