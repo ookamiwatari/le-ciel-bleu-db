@@ -71,11 +71,11 @@ export class MagicComponent implements OnInit {
 
   ngOnInit () {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.magic = magicList.root['法術'].find((magic: any) => { return magic['_編號'] === this.id });
-    this.items = itemList.root['道具'].filter((item: any) => { return item['_常駐法術'] === this.id; });
-    this.monsters = monsterList.root.npc.filter((monster: any) => { return monster['_攻擊法術1'] == this.id || monster['_攻擊法術2'] == this.id ||monster['_攻擊法術3'] == this.id ||monster['_攻擊法術4'] == this.id })
-    if (this.magic['_可學職業1'] && classes[this.magic['_可學職業1']]) this.class = classes[this.magic['_可學職業1']];
-    if (this.magic['_可學職業2'] && classes[this.magic['_可學職業2']]) this.class += '・' + classes[this.magic['_可學職業2']];
+    this.magic = magicList.root['法術'].find((magic: any) => { return magic['編號'] === this.id });
+    this.items = itemList.root['道具'].filter((item: any) => { return item['常駐法術'] === this.id; });
+    this.monsters = monsterList.root.npc.filter((monster: any) => { return monster['攻擊法術1'] == this.id || monster['攻擊法術2'] == this.id ||monster['攻擊法術3'] == this.id ||monster['攻擊法術4'] == this.id })
+    if (this.magic['可學職業1'] && classes[this.magic['可學職業1']]) this.class = classes[this.magic['可學職業1']];
+    if (this.magic['可學職業2'] && classes[this.magic['可學職業2']]) this.class += '・' + classes[this.magic['可學職業2']];
   }
 
 }

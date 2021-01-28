@@ -1,4 +1,4 @@
-<h1 style="margin: 3vw 3vw 0 3vw">{{quest['_名稱']}}</h1>
+<h1 style="margin: 3vw 3vw 0 3vw">{{quest['名稱']}}</h1>
 <mat-accordion class="example-headers-align" multi>
   <mat-expansion-panel expanded>
     <mat-expansion-panel-header style="font-size: large">
@@ -9,43 +9,43 @@
     <div class="List">
       <div class="List-Item">
         <p class="List-Item-Title">名称</p>
-        <p class="List-Item-Text">{{quest['_任務名稱']}}</p>
+        <p class="List-Item-Text">{{quest['任務名稱']}}</p>
       </div>
       <div class="List-Item">
         <p class="List-Item-Title">説明</p>
-        <p class="List-Item-Text">{{quest['_任務前言']}}</p>
+        <p class="List-Item-Text">{{quest['任務前言']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_陣營限制'] === '聯盟1'">
+      <div class="List-Item" *ngIf="quest['陣營限制'] === '聯盟1'">
         <p class="List-Item-Title">陣営</p>
         <p class="List-Item-Text">赤</p>
       </div>
       <div class="List-Item" *ngIf="premise1">
         <p class="List-Item-Title">前提{{premise2 ? '1' : ''}}</p>
-        <p class="List-Item-Text">{{premise1['_任務名稱']}}</p>
+        <p class="List-Item-Text">{{premise1['任務名稱']}}</p>
       </div>
       <div class="List-Item" *ngIf="premise2">
         <p class="List-Item-Title">前提2</p>
-        <p class="List-Item-Text">{{premise2['_任務名稱']}}</p>
+        <p class="List-Item-Text">{{premise2['任務名稱']}}</p>
       </div>
       <div class="List-Item">
         <p class="List-Item-Title">レベル制限</p>
-        <p class="List-Item-Text">{{quest['_等級限制']}}</p>
+        <p class="List-Item-Text">{{quest['等級限制']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_獲得金錢']">
+      <div class="List-Item" *ngIf="quest['獲得金錢']">
         <p class="List-Item-Title">金銭</p>
-        <p class="List-Item-Text">{{quest['_獲得金錢']}}</p>
+        <p class="List-Item-Text">{{quest['獲得金錢']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_獲得EXP']">
+      <div class="List-Item" *ngIf="quest['獲得EXP']">
         <p class="List-Item-Title">ベース経験値</p>
-        <p class="List-Item-Text">{{quest['_獲得EXP']}}</p>
+        <p class="List-Item-Text">{{quest['獲得EXP']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_獲得J.EXP']">
+      <div class="List-Item" *ngIf="quest['獲得J.EXP']">
         <p class="List-Item-Title">クラス経験値</p>
-        <p class="List-Item-Text">{{quest['_獲得J.EXP']}}</p>
+        <p class="List-Item-Text">{{quest['獲得J.EXP']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_任務評價']">
+      <div class="List-Item" *ngIf="quest['任務評價']">
         <p class="List-Item-Title">リンク経験値</p>
-        <p class="List-Item-Text">{{quest['_任務評價']}}</p>
+        <p class="List-Item-Text">{{quest['任務評價']}}</p>
       </div>
       <div class="List-Item" *ngIf="item1">
         <p class="List-Item-Title">報酬{{item2 ? '1' : ''}}</p>
@@ -71,15 +71,15 @@
         <p class="List-Item-Title">報酬6</p>
         <p class="List-Item-Text">{{item6}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_任務結語']">
+      <div class="List-Item" *ngIf="quest['任務結語']">
         <p class="List-Item-Title">条件</p>
-        <p class="List-Item-Text">{{quest['_任務結語']}}</p>
+        <p class="List-Item-Text">{{quest['任務結語']}}</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_重置時間']">
+      <div class="List-Item" *ngIf="quest['重置時間']">
         <p class="List-Item-Title">クールタイム</p>
-        <p class="List-Item-Text">{{quest['_重置時間']}}秒</p>
+        <p class="List-Item-Text">{{quest['重置時間']}}秒</p>
       </div>
-      <div class="List-Item" *ngIf="quest['_陣營限制'] === '聯盟2'">
+      <div class="List-Item" *ngIf="quest['陣營限制'] === '聯盟2'">
         <p class="List-Item-Title">陣営</p>
         <p class="List-Item-Text">青</p>
       </div>
@@ -95,13 +95,13 @@
     <div class="List">
       <ng-container *ngFor="let step of steps; let i = index">
         <ng-container *ngFor="let info of step.trace">
-          <div class="List-Item" *ngIf="info['_位置查表'] !== '物品'">
+          <div class="List-Item" *ngIf="info['位置查表'] !== '物品'">
             <p class="List-Item-Title">ステップ{{i}}</p>
-            <p class="List-Item-Text">{{info['_說明']}}{{info['_需求數量'] ? 'x' + info['_需求數量'] : ''}}</p>
+            <p class="List-Item-Text">{{info['說明']}}{{info['需求數量'] ? 'x' + info['需求數量'] : ''}}</p>
           </div>
-          <div class="List-Item" *ngIf="info['_位置查表'] === '物品'" style="cursor: pointer" (click)="clickItem($event, info);">
+          <div class="List-Item" *ngIf="info['位置查表'] === '物品'" style="cursor: pointer" (click)="clickItem($event, info);">
             <p class="List-Item-Title">ステップ{{i}}</p>
-            <p class="List-Item-Text">{{info['_說明']}}{{info['_需求數量'] ? 'x' + info['_需求數量'] : ''}}</p>
+            <p class="List-Item-Text">{{info['說明']}}{{info['需求數量'] ? 'x' + info['需求數量'] : ''}}</p>
           </div>
         </ng-container>
       </ng-container>

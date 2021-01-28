@@ -43,15 +43,15 @@ export class MonsterListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const datas = monsterList.root.npc.filter((monster: any) => {
-      return typeof monster !== 'string' && monster['_編號']
+      return typeof monster !== 'string' && monster['編號']
     }).map((monster: any) => {
       return {
-        id: monster['_編號'],
-        name: monster['_名稱'],
-        lv: monster['_等級'],
-        type: monster['_系別'],
-        description: monster['_圖鑑說明'],
-        memo: pickupList.monsters.filter((pickup) => pickup.ids.find(id => id === +monster['_編號'])).map(pickup => pickup.version).join(', ')
+        id: monster['編號'],
+        name: monster['名稱'],
+        lv: monster['等級'],
+        type: monster['系別'],
+        description: monster['圖鑑說明'],
+        memo: pickupList.monsters.filter((pickup) => pickup.ids.find(id => id === +monster['編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {

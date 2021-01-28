@@ -79,17 +79,17 @@ export class MagicListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const datas = magicList.root['法術'].filter((magic: any) => {
-      return typeof magic !== 'string' && magic['_編號']
+      return typeof magic !== 'string' && magic['編號']
     }).map((magic: any) => {
       let class_string = '';
-      if (magic['_可學職業1'] && classes[magic['_可學職業1']]) class_string += classes[magic['_可學職業1']];
-      if (magic['_可學職業2'] && classes[magic['_可學職業2']]) class_string += '・' + classes[magic['_可學職業2']];
+      if (magic['可學職業1'] && classes[magic['可學職業1']]) class_string += classes[magic['可學職業1']];
+      if (magic['可學職業2'] && classes[magic['可學職業2']]) class_string += '・' + classes[magic['可學職業2']];
       return {
-        id: magic['_編號'],
-        name: magic['_名稱'],
+        id: magic['編號'],
+        name: magic['名稱'],
         class: class_string,
-        description: magic['_說明'],
-        memo: pickupList.magics.filter((pickup) => pickup.ids.find(id => id === +magic['_編號'])).map(pickup => pickup.version).join(', ')
+        description: magic['說明'],
+        memo: pickupList.magics.filter((pickup) => pickup.ids.find(id => id === +magic['編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {

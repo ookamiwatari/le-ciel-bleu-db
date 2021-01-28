@@ -47,16 +47,16 @@ export class QuestListComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const datas = questList.root['任務'].map((quest: any) => {
-      const premise1 = questList.root['任務'].find((_quest) => _quest['_編號'] === quest['_前置任務'])['_任務名稱'];
-      const premise2 = questList.root['任務'].find((_quest) => _quest['_編號'] === quest['_前置任務2'])['_任務名稱'];
+      const premise1 = questList.root['任務'].find((_quest) => _quest['編號'] === quest['前置任務'])['任務名稱'];
+      const premise2 = questList.root['任務'].find((_quest) => _quest['編號'] === quest['前置任務2'])['任務名稱'];
       return {
-        id: quest['_編號'],
-        name: quest['_任務名稱'],
-        lv: quest['_等級限制'],
-        lexp: quest['_任務評價'],
+        id: quest['編號'],
+        name: quest['任務名稱'],
+        lv: quest['等級限制'],
+        lexp: quest['任務評價'],
         premise: (premise1 ? premise1 : '') + (premise2 ? ', ' + premise2 : ''),
         infos: this.getQuestInfos(quest),
-        memo: pickupList.quests.filter((pickup) => pickup.ids.find(id => id === +quest['_編號'])).map(pickup => pickup.version).join(', ')
+        memo: pickupList.quests.filter((pickup) => pickup.ids.find(id => id === +quest['編號'])).map(pickup => pickup.version).join(', ')
       }
     });
     for (const data of datas) {
@@ -77,12 +77,12 @@ export class QuestListComponent implements AfterViewInit {
   getQuestInfos (quest: any) {
     let infos = [];
     for (let i = 1; i < 9; i++) {
-      if (quest['_導引0'+i]) {
-        const steplist: any = questSteplistList.root['列表'].find((steplist: any) => steplist['_編號'] === quest['_導引0'+i]);
+      if (quest['導引0'+i]) {
+        const steplist: any = questSteplistList.root['列表'].find((steplist: any) => steplist['編號'] === quest['導引0'+i]);
         for (let j = 1; j < 6; j++) {
-          if (steplist && steplist['_item'+j]) {
-            const stepinfo: any = questStepinfoList.root.info.find((stepinfo: any) => stepinfo['_編號'] === steplist['_item'+j]);
-            if (stepinfo['_位置查表'] === '物品') infos.push(stepinfo['_說明'] + (+stepinfo['_需求數量'] > 1 ? 'x' + stepinfo['_需求數量'] : ''));
+          if (steplist && steplist['item'+j]) {
+            const stepinfo: any = questStepinfoList.root.info.find((stepinfo: any) => stepinfo['編號'] === steplist['item'+j]);
+            if (stepinfo['位置查表'] === '物品') infos.push(stepinfo['說明'] + (+stepinfo['需求數量'] > 1 ? 'x' + stepinfo['需求數量'] : ''));
           }
         }
       }

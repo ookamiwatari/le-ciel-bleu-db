@@ -40,47 +40,47 @@ export class ItemComponent implements OnInit {
 
   ngOnInit () {
     this.id = this.route.snapshot.paramMap.get('id');
-    this.item = itemList.root['道具'].find((item: any) => { return item['_編號'] === this.id; });
+    this.item = itemList.root['道具'].find((item: any) => { return item['編號'] === this.id; });
     this.drops = dropList.root.drop.filter((drop: any) => {
       for (let i = 1; i <= 40; i++) {
-        const d = drop['_item'+i];
+        const d = drop['item'+i];
         if (d && d === this.id) return true;
       }
       return false;
     }).map((drop: any) => {
-      const monster = monsterList.root.npc.find((monster: any) => { return monster['_編號'] === drop['_編號']});
-      if (!monster || +drop['_編號'] > 4213 ) return { type: 'drop', data: drop }
+      const monster = monsterList.root.npc.find((monster: any) => { return monster['編號'] === drop['編號']});
+      if (!monster || +drop['編號'] > 4213 ) return { type: 'drop', data: drop }
       return { type: 'monster', data: monster };
     });
 
-    console.log('itemname', this.item['_基本名稱']);
+    console.log('itemname', this.item['基本名稱']);
 
     this.infos = questStepinfoList.root.info.filter((info: any) => {
-      return info['_位置查表'] === '物品' && info['_目標編號'] === this.item['_編號'];
+      return info['位置查表'] === '物品' && info['目標編號'] === this.item['編號'];
     }).map((info: any) => {
       return {
         steps: questSteplistList.root['列表'].filter((steplist: any) => {
-          if (steplist['_item1'] && steplist['_item1'] === info['_編號']) return true;
-          if (steplist['_item2'] && steplist['_item2'] === info['_編號']) return true;
-          if (steplist['_item3'] && steplist['_item3'] === info['_編號']) return true;
-          if (steplist['_item4'] && steplist['_item4'] === info['_編號']) return true;
-          if (steplist['_item5'] && steplist['_item5'] === info['_編號']) return true;
+          if (steplist['item1'] && steplist['item1'] === info['編號']) return true;
+          if (steplist['item2'] && steplist['item2'] === info['編號']) return true;
+          if (steplist['item3'] && steplist['item3'] === info['編號']) return true;
+          if (steplist['item4'] && steplist['item4'] === info['編號']) return true;
+          if (steplist['item5'] && steplist['item5'] === info['編號']) return true;
           return false;
         }).map((steplist: any) => {
           return questList.root['任務'].filter((quest) => {
-            if (quest['_導引00'] && quest['_導引00'] === steplist['_編號']) return true;
-            if (quest['_導引01'] && quest['_導引01'] === steplist['_編號']) return true;
-            if (quest['_導引02'] && quest['_導引02'] === steplist['_編號']) return true;
-            if (quest['_導引03'] && quest['_導引03'] === steplist['_編號']) return true;
-            if (quest['_導引04'] && quest['_導引04'] === steplist['_編號']) return true;
-            if (quest['_導引05'] && quest['_導引05'] === steplist['_編號']) return true;
-            if (quest['_導引06'] && quest['_導引06'] === steplist['_編號']) return true;
-            if (quest['_導引07'] && quest['_導引07'] === steplist['_編號']) return true;
-            if (quest['_導引08'] && quest['_導引08'] === steplist['_編號']) return true;
+            if (quest['導引00'] && quest['導引00'] === steplist['編號']) return true;
+            if (quest['導引01'] && quest['導引01'] === steplist['編號']) return true;
+            if (quest['導引02'] && quest['導引02'] === steplist['編號']) return true;
+            if (quest['導引03'] && quest['導引03'] === steplist['編號']) return true;
+            if (quest['導引04'] && quest['導引04'] === steplist['編號']) return true;
+            if (quest['導引05'] && quest['導引05'] === steplist['編號']) return true;
+            if (quest['導引06'] && quest['導引06'] === steplist['編號']) return true;
+            if (quest['導引07'] && quest['導引07'] === steplist['編號']) return true;
+            if (quest['導引08'] && quest['導引08'] === steplist['編號']) return true;
             return false;
           });
         }),
-        count: info['_需求數量']
+        count: info['需求數量']
       };
     });
 
