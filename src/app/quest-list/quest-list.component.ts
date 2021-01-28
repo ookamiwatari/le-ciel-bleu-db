@@ -82,7 +82,7 @@ export class QuestListComponent implements AfterViewInit {
         for (let j = 1; j < 6; j++) {
           if (steplist && steplist['item'+j]) {
             const stepinfo: any = questStepinfoList.root.info.find((stepinfo: any) => stepinfo['編號'] === steplist['item'+j]);
-            if (stepinfo['位置查表'] === '物品') infos.push(stepinfo['說明'] + (+stepinfo['需求數量'] > 1 ? 'x' + stepinfo['需求數量'] : ''));
+            if (stepinfo && stepinfo['位置查表'] === '物品') infos.push(stepinfo['說明'] + (+stepinfo['需求數量'] > 1 ? 'x' + stepinfo['需求數量'] : ''));
           }
         }
       }
