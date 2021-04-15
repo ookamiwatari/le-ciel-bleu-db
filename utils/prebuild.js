@@ -127,7 +127,8 @@ function openWinMerge(files) {
     files.forEach((file, i) => {
       const match = _files.filter((f) => f.slice(7).toUpperCase() === file.name.slice(7).toUpperCase()).reverse();
       if (match.length < 3) return;
-      const result = exec(`cmd.exe /c \"${process.env.WIN_MERGE_PATH}\" ${match[1]} ${match[0]} -s &`, {cwd: 'utils/files'});
+      console.log(`\"${process.env.WIN_MERGE_PATH}\" ${match[1]} ${match[0]} -minimize -wl -wr`);
+      //const result = exec(`cmd.exe /c \"${process.env.WIN_MERGE_PATH}\" ${match[1]} ${match[0]} -s &`, {cwd: 'utils/files'});
     });
     return resolve(files);
   });
