@@ -59,7 +59,8 @@ export class DropComponent implements OnInit {
       } else {
         if (id === '2224') this.items.push({ name: '焼きカボチャの種', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
         if (id === '2225') this.items.push({ name: 'りんご飴', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
-        if (id === '20070') this.items.push({ name: 'ギルドポイント', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
+        if (id === '20250') this.items.push({ name: '黒色火薬', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
+        if (id === '20251') this.items.push({ name: '白色宝玉', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
         if (10701 < +id && +id < 10750) this.items.push({ name: 'レヴェイエ', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
         if (31251 < +id && +id < 31287) this.items.push({ name: '本国用アイテム', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
         if (id === '10857') this.items.push({ name: 'アシストメダル', count: count, description: '未実装', prob: factor && prob ? prob * 100 / factor : undefined});
@@ -78,7 +79,8 @@ export class DropComponent implements OnInit {
       } else {
         if (id === '2224') this.adv_items.push({ name: '焼きカボチャの種', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
         if (id === '2225') this.adv_items.push({ name: 'りんご飴', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
-        if (id === '20070') this.adv_items.push({ name: 'ギルドポイント', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
+        if (id === '20250') this.items.push({ name: '黒色火薬', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
+        if (id === '20251') this.items.push({ name: '白色宝玉', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
         if (10701 < +id && +id < 10750) this.adv_items.push({ name: 'レヴェイエ', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
         if (31251 < +id && +id < 31287) this.adv_items.push({ name: '本国用アイテム', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
         if (id === '10857') this.adv_items.push({ name: 'アシストメダル', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });

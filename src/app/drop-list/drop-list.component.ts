@@ -83,7 +83,8 @@ export class DropListComponent implements AfterViewInit {
     return drops.map((d) => {
       if (d.id === '2224') return '焼きカボチャの種(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '2225') return 'りんご飴(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
-      if (d.id === '20070') return 'ギルドポイント(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20250') return '黒色火薬' + (d.count !== '1' ? 'x' + d.count : '');
+      if (d.id === '20251') return '白色宝玉' + (d.count !== '1' ? 'x' + d.count : '');
       if (10701 < +d.id && +d.id < 10750) return 'レヴェイエ' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (31251 < +d.id && +d.id < 31287) return '本国用アイテム' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '10857') return 'アシストメダル(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
