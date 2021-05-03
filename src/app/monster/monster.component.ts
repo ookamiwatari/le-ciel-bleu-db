@@ -81,15 +81,15 @@ export class MonsterComponent implements OnInit {
       const count = drop['count'+i];
       const prob = +drop['prob'+i];
       if (item) {
-        this.adv_items.push({ id: item['編號'], name: item['基本名稱'], count: count, description: item['說明定義'], prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱'] });
+        this.adv_items.push({ id: item['編號'], name: item['基本名稱'], count: count, description: item['說明定義'], prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱'] });
       } else {
-        if (id === '2224') this.adv_items.push({ name: '焼きカボチャの種', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (id === '2225') this.adv_items.push({ name: 'りんご飴', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (id === '20250') this.adv_items.push({ name: '黒色火薬', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (id === '20251') this.adv_items.push({ name: '白色宝玉', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (10701 < +id && +id < 10750) this.adv_items.push({ name: 'レヴェイエ', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (31251 < +id && +id < 31287) this.adv_items.push({ name: '本国用アイテム', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
-        if (id === '10857') this.adv_items.push({ name: 'アシストメダル', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: quest['任務名稱']});
+        if (id === '2224') this.adv_items.push({ name: '焼きカボチャの種', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (id === '2225') this.adv_items.push({ name: 'りんご飴', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (id === '20250') this.adv_items.push({ name: '黒色火薬', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (id === '20251') this.adv_items.push({ name: '白色宝玉', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (10701 < +id && +id < 10750) this.adv_items.push({ name: 'レヴェイエ', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (31251 < +id && +id < 31287) this.adv_items.push({ name: '本国用アイテム', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
+        if (id === '10857') this.adv_items.push({ name: 'アシストメダル', count: count, description: '未実装', prob: adv_factor && prob ? prob * 100 / adv_factor : undefined, quest: 'Lv.'+quest['等級限制'] + ' ' + quest['任務名稱']});
       }
 
     }
