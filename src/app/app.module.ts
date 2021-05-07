@@ -1,3 +1,6 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollingModule as ExperimentalScrollingModule } from '@angular/cdk-experimental/scrolling';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -20,6 +23,11 @@ import { MagicListComponent } from './magic-list/magic-list.component';
 import { MagicComponent } from './magic/magic.component';
 import { QuestListComponent } from './quest-list/quest-list.component';
 import { QuestComponent } from './quest/quest.component';
+import { MmsComponent } from './mms/mms.component';
+import { MmsItemTargetComponent } from './mms/mms-item-target/mms-item-target.component';
+import { MmsItemInputComponent } from './mms/mms-item-input/mms-item-input.component';
+import { MmsTableComponent } from './mms/mms-table/mms-table.component';
+import { MmsSimulatorComponent } from './mms/mms-simulator/mms-simulator.component';
 
 
 @NgModule({
@@ -36,6 +44,11 @@ import { QuestComponent } from './quest/quest.component';
     MagicComponent,
     QuestListComponent,
     QuestComponent,
+    MmsComponent,
+    MmsItemTargetComponent,
+    MmsItemInputComponent,
+    MmsTableComponent,
+    MmsSimulatorComponent
   ],
   imports: [
     FormsModule,
@@ -45,6 +58,8 @@ import { QuestComponent } from './quest/quest.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ScrollingModule,
+    ExperimentalScrollingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

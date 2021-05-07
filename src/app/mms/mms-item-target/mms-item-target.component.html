@@ -1,0 +1,51 @@
+<h2>指定アイテム</h2>
+<div>
+  <mat-form-field style="width: 50%; max-width: 600px;">
+    <mat-label>アイテム名</mat-label>
+    <input type="search" matInput [formControl]="targetControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="targetItemSelected($event.option)" [displayWith]="targetDisplayFn">
+      <mat-option *ngFor="let option of targetFilteredOption | async" [value]="option">
+        {{option.name}}: {{option.table}}
+      </mat-option>
+    </mat-autocomplete>
+    <button *ngIf="targetItem.name" type="button" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearTargetItem()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+</div>
+
+<h2>投入アイテム</h2>
+<div *ngFor="let id of [0, 1, 2]">
+  <mat-form-field style="width: 50%; max-width: 600px;">
+    <mat-label>アイテム名</mat-label>
+    <input type="search" matInput [formControl]="inputControls[id]" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="inputItemSelected(id, $event.option)" [displayWith]="inputDisplayFn">
+      <mat-option *ngFor="let option of inputFilteredOptions[id] | async" [value]="option">
+        {{option.name}}: {{option.point}}
+      </mat-option>
+    </mat-autocomplete>
+    <button *ngIf="items[id]" type="button" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearInputItem(id)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field *ngIf="items[id]" style="margin-left: 16px; width: 20%; max-width: 240px">
+    <mat-label>購入価格</mat-label>
+    <input matInput type="number" [(ngModel)]="items[id].cost" (change)="results=[]">
+  </mat-form-field>
+</div>
+
+<button mat-raised-button color="primary" (click)="search()" *ngIf="!results.length" [disabled]="!targetItem.name || !(items[0] || items[1] || items[2])">検索</button>
+
+{{message}}
+
+<cdk-virtual-scroll-viewport autosize class="example-viewport" *ngIf="results.length">
+  <div *cdkVirtualFor="let result of results" class="example-item" style="margin: 24px; background: #ffffff">
+    <h2 matTooltip="ポイント: {{result.point | number}}" matTooltipPosition="above">費用: {{result.cost | number}}</h2>
+    <ul style="margin-top: 0;">
+      <li *ngIf="items[0] && result.counts[0]">{{items[0].name}} x {{result.counts[0]}}</li>
+      <li *ngIf="items[1] && result.counts[1]">{{items[1].name}} x {{result.counts[1]}}</li>
+      <li *ngIf="items[2] && result.counts[2]">{{items[2].name}} x {{result.counts[2]}}</li>
+    </ul>
+  </div>
+</cdk-virtual-scroll-viewport>

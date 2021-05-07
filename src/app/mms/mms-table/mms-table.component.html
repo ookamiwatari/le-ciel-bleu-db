@@ -1,0 +1,11 @@
+ポイント: {{point | number}}
+ランク: {{rank | number}}
+スロット: {{slot}}
+<div class="List">
+  <ng-container *ngFor="let item of items">
+    <div class="List-Item" style="cursor: pointer">
+        <p class="List-Item-Title">{{item.name}} {{item.count !== '1' ? 'x' + item.count : ''}}{{item.prob ? ' (' + item.prob + '%)' : ''}}</p>
+        <p class="List-Item-Text"> {{item.description}}</p>
+    </div>
+  </ng-container>
+</div>

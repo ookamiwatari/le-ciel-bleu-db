@@ -1,0 +1,59 @@
+mat-expansion-panel {
+  margin: 1.5vw !important;
+}
+
+
+.List {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 540px) {
+  .List {
+    margin-top: 24px;
+  }
+}
+.List-Item {
+  border-bottom: 1px solid #5bc8ac;
+  display: flex;
+}
+.List-Item:first-child {
+  border-top: 1px solid #5bc8ac;
+}
+.List-Item-Title {
+  width: 30%;
+  max-width: 240px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 1.8;
+  font-size: 15px;
+}
+@media screen and (max-width: 540px) {
+  .List-Item-Title {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+}
+.List-Item-Text {
+  padding: 10px;
+  line-height: 1.8;
+  font-size: 15px;
+  flex: 1 0;
+}
+.List-Item-Ul {
+  padding: 10px;
+  line-height: 1.8;
+  list-style: none;
+  font-size: 15px;
+  margin: 0;
+}
+@media screen and (max-width: 540px) {
+  .List-Item-Text {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  .List-Item-Ul {
+    font-size: 14px;
+  }
+}

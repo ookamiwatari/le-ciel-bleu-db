@@ -1,0 +1,71 @@
+mat-expansion-panel {
+  margin: 1.5vw !important;
+}
+
+.example-viewport {
+  height: 600px;
+  width: 864px;
+  max-width: 71%;
+  border: 1px solid black;
+}
+
+.example-item {
+  height: 230px;
+}
+
+ul {
+  padding: 0.5em 1em 0.5em 2.3em;
+  position: relative;
+}
+
+ul li {
+  line-height: 1.5;
+  padding: 0.5em 0;
+  list-style-type: none!important;/*ポチ消す*/
+}
+
+ul li:before {
+  font-family: "Material Icons";
+  content: "\e876";
+  position: absolute;
+  left : 1em; /*左端からのアイコンまで*/
+  color: #3f51b5; /*アイコン色*/
+}
+
+cdk-virtual-scroll-viewport h2 {
+  position: relative;
+  display: inline-block;
+  margin: 1rem 0 1rem -10px;
+  padding: 1rem 3rem;
+  color: #fff;
+  border-radius: 0 100vh 100vh 0;
+  background: #0075a9;
+  -webkit-box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, .2);
+}
+
+cdk-virtual-scroll-viewport h2:before {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 0;
+  height: 0;
+  content: '';
+  border-top: 10px solid #005276;
+  border-left: 10px solid transparent;
+}
+
+/deep/ .cdk-virtual-scroll-content-wrapper {
+  background: #00000020;
+}
+
+cdk-virtual-scroll-viewport::-webkit-scrollbar {
+  width: 12px;
+}
+cdk-virtual-scroll-viewport::-webkit-scrollbar-track {
+  background: #00000020;
+}
+cdk-virtual-scroll-viewport::-webkit-scrollbar-thumb {
+  background: #34c0eb;
+  border-radius: 10px;
+}

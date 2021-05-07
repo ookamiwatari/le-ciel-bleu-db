@@ -1,0 +1,26 @@
+<div *ngFor="let id of [0, 1, 2, 3, 4]">
+  <mat-form-field style="width: 50%; max-width: 600px;">
+    <mat-label>アイテム名</mat-label>
+    <input type="search" matInput [formControl]="myControls[id]" [matAutocomplete]="auto" autocomplete="off">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="itemSelected(id, $event.option)" [displayWith]="displayFn">
+      <!--TODO: バツボタン-->
+      <mat-option *ngFor="let option of filteredOptions[id] | async" [value]="option">
+        {{option.name}}: {{option.point}}
+      </mat-option>
+    </mat-autocomplete>
+    <button *ngIf="this.points[id]" type="button" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearItem(id)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  &nbsp;x&nbsp;
+  <mat-form-field>
+    <mat-label>個数</mat-label>
+    <input matInput type="number" [(ngModel)]="counts[id]" (change)="update()">
+  </mat-form-field>
+  &nbsp;=&nbsp;
+  <mat-form-field style="pointer-events: none;">
+    <mat-label>枠値</mat-label>
+    <input matInput [value]="values[id]">
+  </mat-form-field>
+</div>
+<mms-table [point]="point"></mms-table>

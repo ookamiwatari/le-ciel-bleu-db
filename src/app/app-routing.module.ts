@@ -12,6 +12,7 @@ import { MagicListComponent } from './magic-list/magic-list.component';
 import { MagicComponent } from './magic/magic.component';
 import { QuestListComponent } from './quest-list/quest-list.component';
 import { QuestComponent } from './quest/quest.component';
+import { MmsComponent } from './mms/mms.component';
 
 const routes: Routes = [
   { path: 'item', component: ItemListComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'magic/:id', component: MagicComponent },
   { path: 'quest', component: QuestListComponent },
   { path: 'quest/:id', component: QuestComponent },
+  { path: 'mms', component: MmsComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
 ];
