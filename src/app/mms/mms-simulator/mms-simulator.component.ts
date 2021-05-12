@@ -21,8 +21,9 @@ export class MmsSimulatorComponent implements OnInit {
   public slot: number = 1;
   public openedStep: number = 0;
   public confirmed: number = -1;
-  public corrections: string[] = ['STR+10', 'INT+15', 'AGI+15', 'STR+12', 'STR+15'];
   public items : any[] = [];
+  public reverstone: number = 0;
+  public pickups: any[] = [];
 
   constructor(
   ) {
@@ -52,40 +53,35 @@ export class MmsSimulatorComponent implements OnInit {
     const drop = servDropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);
     const drops = servDropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0);
     this.items = [
-      this._lotItem(drop),
-      this._lotItem(drops[Math.floor(Math.random() * 26)]),
-      this._lotItem(drops[Math.floor(Math.random() * 26)]),
-      this._lotItem(drops[Math.floor(Math.random() * 26)]),
-      this._lotItem(drops[Math.floor(Math.random() * 26)])
+      this._lotItem(drop, this.point),
+      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point)
     ];
-    this.corrections = [
-      this._getCorrection(this.point),
-      this._getCorrection(this.point),
-      this._getCorrection(this.point),
-      this._getCorrection(this.point),
-      this._getCorrection(this.point)
-    ]
   }
 
-  private _lotItem (drop: any) {
+  private _lotItem (drop: any, point: number) {
     let rnd = Math.random() * drop.factor;
     for (let i = 1; i <= 10; i++) {
       rnd = rnd - +drop['prob' + i];
-      if (rnd < 0) return this._findItem(drop['item' + i])
+      if (rnd < 0) return this._findItem(drop['item' + i], point)
     }
     return {
       name: '無し',
       id: null,
       canCorrection: false,
+      correction: ''
     };
   }
 
-  private _findItem (id: number) {
+  private _findItem (id: number, point: number) {
     const item = itemList.root['道具'].find((item: any) => { return item['編號'] === id; });
     return {
       name: item['基本名稱'],
       id,
-      canCorrection: item['無組合變化'] === '是'
+      canCorrection: item['無組合變化'] === '是',
+      correction: this._getCorrection(this.point)
     }
   }
 

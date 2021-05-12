@@ -1,33 +1,12 @@
 <h1 style="margin: 3vw 3vw 0 3vw">MMS</h1>
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel expanded>
-    <mat-expansion-panel-header style="font-size: large">
-      <mat-panel-title>
-        アイテム指定
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+<mat-tab-group>
+  <mat-tab label="アイテム指定">
     <mms-item-target></mms-item-target>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header style="font-size: large">
-      <mat-panel-title>
-        シミュレーター
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+  </mat-tab>
+  <mat-tab label="シミュレーター">
     <mms-simulator></mms-simulator>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-accordion class="example-headers-align" multi>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header style="font-size: large">
-      <mat-panel-title>
-        アイテム投入
-      </mat-panel-title>
-    </mat-expansion-panel-header>
+  </mat-tab>
+  <mat-tab label="アイテム投入">
     <mms-item-input></mms-item-input>
-  </mat-expansion-panel>
-</mat-accordion>
-
-<div style="height: 24px"></div>
+  </mat-tab>
+</mat-tab-group>

@@ -1,9 +1,9 @@
 <mat-form-field style="width: 30%; max-width: 240px;">
   <mat-label>ポイント</mat-label>
-  <input matInput type="number" [(ngModel)]="point">
+  <input matInput type="number" [disabled]="items.length !== 0" [(ngModel)]="point">
 </mat-form-field>
 <button mat-raised-button style="margin-left: 10px; width: 130px;" color="primary" *ngIf="!items.length" (click)="calc()">錬金！</button>
-<button mat-raised-button style="margin-left: 10px; width: 130px;" color="accent" *ngIf="items.length" (click)="items = []; confirmed = -1;">リセット</button>
+<button mat-raised-button style="margin-left: 10px; width: 130px;" color="accent" *ngIf="items.length" [disabled]="confirmed === -1" (click)="items = []; confirmed = -1;">リセット</button>
 <div class="List">
   <ng-container *ngFor="let i of [0, 1, 2, 3, 4]">
     <div class="List-Item" style="cursor: pointer">
@@ -12,7 +12,7 @@
             {{items[i].name}}
           </ng-container>
           <ng-container *ngIf="i <= openedStep && items.length && confirmed === i">
-            {{items[i].name}} {{items[i].canCorrection ? corrections[i] : ''}}
+            {{items[i].name}} {{items[i].canCorrection ? items[i].correction : ''}}
           </ng-container>
           <ng-container *ngIf="(i > openedStep || !items.length) && confirmed === -1">
             ？？？？？？
@@ -25,11 +25,42 @@
           </ng-container>
         </span>
         <span class="List-Item-Text">
-          <button mat-raised-button color="accent" *ngIf="i < openedStep && items.length && confirmed === -1" style="width: 130px;" (click)="confirmed = i">リバーストーン</button>
-          <button mat-raised-button color="accent" *ngIf="i === openedStep && items.length && confirmed === -1" style="width: 130px;" (click)="confirmed = i">取り出す</button>
+          <button mat-raised-button color="accent" *ngIf="i < openedStep && items.length && confirmed === -1" style="width: 130px;" (click)="confirmed = i; reverstone = reverstone + 1; pickups.push(items[i]);">リバーストーン</button>
+          <button mat-raised-button color="accent" *ngIf="i === openedStep && items.length && confirmed === -1" style="width: 130px;" (click)="confirmed = i; pickups.push(items[i]);">取り出す</button>
           <button mat-raised-button color="primary" *ngIf="i - 1 === openedStep && items.length && confirmed === -1" style="width: 130px;" (click)="openedStep = openedStep + 1">開く</button>
           <button mat-raised-button color="primary" disabled *ngIf="i - 1 > openedStep || !items.length || confirmed !== -1" style="width: 130px;">-</button>
         </span>
     </div>
   </ng-container>
+</div>
+
+<h2 style="margin-top: 24px;">取り出しアイテム</h2>
+<div class="List">
+  <div class="List-Item" style="cursor: pointer">
+    <span class="List-Item-Title" style="display: flex; flex-direction: column; justify-content: center;">
+      取り出し回数{{pickups.length}}回
+    </span>
+    <span class="List-Item-Text">
+      リバーストーン{{reverstone}}回
+    </span>
+  </div>
+
+  <ng-container *ngFor="let pickup of pickups">
+    <div class="List-Item" style="cursor: pointer">
+      <span class="List-Item-Title" style="display: flex; flex-direction: column; justify-content: center;">
+        {{pickup.name}} {{pickup.canCorrection ? pickup.correction : ''}}
+      </span>
+      <span class="List-Item-Text">
+      </span>
+    </div>
+  </ng-container>
+
+  <div class="List-Item" style="cursor: pointer">
+    <span class="List-Item-Title" style="display: flex; flex-direction: column; justify-content: center;">
+      取り出し回数{{pickups.length}}回
+    </span>
+    <span class="List-Item-Text">
+      <button mat-raised-button color="accent" style="width: 130px;" (click)="pickups = [];">クリア</button>
+    </span>
+  </div>
 </div>

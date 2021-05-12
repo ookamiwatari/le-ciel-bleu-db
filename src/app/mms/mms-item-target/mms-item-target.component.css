@@ -7,6 +7,7 @@ mat-expansion-panel {
   width: 864px;
   max-width: 71%;
   border: 1px solid black;
+  margin-bottom: 24px;
 }
 
 .example-item {
