@@ -57,10 +57,9 @@
 
   <div class="List-Item" style="cursor: pointer">
     <span class="List-Item-Title" style="display: flex; flex-direction: column; justify-content: center;">
-      取り出し回数{{pickups.length}}回
+      <button mat-raised-button color="accent" style="width: 130px;" (click)="pickups = [];">クリア</button>
     </span>
     <span class="List-Item-Text">
-      <button mat-raised-button color="accent" style="width: 130px;" (click)="pickups = [];">クリア</button>
     </span>
   </div>
 </div>
