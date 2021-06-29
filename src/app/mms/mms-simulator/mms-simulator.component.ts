@@ -62,10 +62,11 @@ export class MmsSimulatorComponent implements OnInit {
   }
 
   private _lotItem (drop: any, point: number) {
+    const latest_drop = dropList.root.drop.find((d: any) => drop['怪物名稱'] === d['怪物名稱']);
     let rnd = Math.random() * drop.factor;
     for (let i = 1; i <= 10; i++) {
       rnd = rnd - +drop['prob' + i];
-      if (rnd < 0) return this._findItem(drop['item' + i], point)
+      if (rnd < 0) return this._findItem(latest_drop['item' + i], point)
     }
     return {
       name: '無し',

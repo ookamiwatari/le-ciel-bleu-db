@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import itemList from '../../../assets/json/item.json';
-import servDropList from '../../../assets/json/serv_drop.json';
+import dropList from '../../../assets/json/drop.json';
 
 @Component({
   selector: 'mms-item-target',
@@ -17,7 +17,7 @@ export class MmsItemTargetComponent implements OnInit {
   targetControl = new FormControl();
   targetFilteredOption = this.targetControl.valueChanges.pipe(startWith(''), map((value: any) => this._targetFilter(value)));
 
-  targetList = servDropList.root.drop
+  targetList = dropList.root.drop
     .filter((drop: any) => { return drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0})
     .map((drop: any) => {
       return Object.keys(drop)
