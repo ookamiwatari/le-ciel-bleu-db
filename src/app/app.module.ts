@@ -28,6 +28,7 @@ import { MmsItemTargetComponent } from './mms/mms-item-target/mms-item-target.co
 import { MmsItemInputComponent } from './mms/mms-item-input/mms-item-input.component';
 import { MmsTableComponent } from './mms/mms-table/mms-table.component';
 import { MmsSimulatorComponent } from './mms/mms-simulator/mms-simulator.component';
+import { MmsTableListComponent } from './mms/mms-table-list/mms-table-list.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { MmsSimulatorComponent } from './mms/mms-simulator/mms-simulator.compone
     MmsItemTargetComponent,
     MmsItemInputComponent,
     MmsTableComponent,
-    MmsSimulatorComponent
+    MmsSimulatorComponent,
+    MmsTableListComponent,
   ],
   imports: [
     FormsModule,

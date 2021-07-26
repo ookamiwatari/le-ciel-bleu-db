@@ -3,8 +3,7 @@ mat-expansion-panel {
 }
 
 .example-viewport {
-  height: 600px;
-  width: 864px;
+  height: calc(82vh - 390px);
   max-width: 71%;
   border: 1px solid black;
   margin-bottom: 24px;

@@ -21,7 +21,8 @@ mat-expansion-panel {
 }
 
 mat-tab-group {
-  margin: 3vw;
+  margin: 3vh 3vw;
+  height: 82vh
 }
 
 /deep/ .mat-tab-body-wrapper {
