@@ -36,6 +36,7 @@ export class MmsItemTargetComponent implements OnInit {
 
   targetItem: any = {};
   items: any[] = [null, null, null];
+  isTargetHighQuality = true;
   results: any[] = [];
   message = '';
 
@@ -136,9 +137,9 @@ export class MmsItemTargetComponent implements OnInit {
       case '600000':
         return 250000;
       case '1400000':
-        return 1000000;
+        return this.isTargetHighQuality ? 1000000 : 600000;
       case '4000000':
-        return 3000000;
+        return this.isTargetHighQuality ? 3000000 : 1400000;
       case '10000000':
         return 4000000;
       default:
