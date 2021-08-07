@@ -41,11 +41,15 @@
 
 <cdk-virtual-scroll-viewport autosize class="example-viewport" *ngIf="results.length">
   <div *cdkVirtualFor="let result of results" class="example-item" style="margin: 24px; background: #ffffff">
-    <h2 matTooltip="ポイント: {{result.point | number}}" matTooltipPosition="above">費用: {{result.cost | number}}</h2>
+    <h2 matTooltip="ポイント: {{result.point | number}}" matTooltipPosition="above">
+      <span style="vertical-align: middle">費用: {{result.cost | number}}</span>
+      <button mat-icon-button *ngIf="!result.bookmarked" (click)="addBookmark(result); result.bookmarked = true;"><mat-icon>star_border</mat-icon></button>
+      <button mat-icon-button *ngIf="result.bookmarked"><mat-icon>star</mat-icon></button>
+    </h2>
     <ul style="margin-top: 0;">
-      <li *ngIf="items[0] && result.counts[0]">{{items[0].name}} x {{result.counts[0]}}</li>
-      <li *ngIf="items[1] && result.counts[1]">{{items[1].name}} x {{result.counts[1]}}</li>
-      <li *ngIf="items[2] && result.counts[2]">{{items[2].name}} x {{result.counts[2]}}</li>
+      <li *ngIf="result.items[0] && result.counts[0]">{{result.items[0].name}} x {{result.counts[0]}}</li>
+      <li *ngIf="result.items[1] && result.counts[1]">{{result.items[1].name}} x {{result.counts[1]}}</li>
+      <li *ngIf="result.items[2] && result.counts[2]">{{result.items[2].name}} x {{result.counts[2]}}</li>
     </ul>
   </div>
 </cdk-virtual-scroll-viewport>

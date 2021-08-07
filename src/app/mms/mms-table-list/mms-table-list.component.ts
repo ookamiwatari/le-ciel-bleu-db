@@ -50,7 +50,6 @@ export class MmsTableListComponent implements OnInit {
         memo: this.getDropMemo(drop)
       };
     });
-    console.log('datas', datas);
     for (const data of datas) {
       this.dataSource.data.push(data);
     }

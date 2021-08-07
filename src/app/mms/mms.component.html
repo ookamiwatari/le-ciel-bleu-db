@@ -1,5 +1,5 @@
 <h1 style="margin: 3vh 3vw 0 3vw">MMS</h1>
-<mat-tab-group>
+<mat-tab-group (selectedTabChange)="event.emit()">
   <mat-tab label="アイテム指定">
     <mms-item-target></mms-item-target>
   </mat-tab>
@@ -11,5 +11,8 @@
   </mat-tab>
   <mat-tab label="テーブル一覧">
     <mms-table-list></mms-table-list>
+  </mat-tab>
+  <mat-tab label="ブックマーク">
+    <mms-bookmark [event]="event"></mms-bookmark>
   </mat-tab>
 </mat-tab-group>

@@ -46,6 +46,7 @@ export class MmsItemTargetComponent implements OnInit {
   ngOnInit () {
   }
 
+
   private _targetFilter (value: string) {
     return this.targetList
       .filter((item: any) => item.name.indexOf(value) != -1)
@@ -121,7 +122,12 @@ export class MmsItemTargetComponent implements OnInit {
       return;
     }
 
-    this.results = this._bruteforceSearch(this.items, target_point, target_mod);
+    // TODO:
+    if (!this.results.length) {
+
+    }
+
+    this.results = this._bruteforceSearch([...this.items], target_point, target_mod);
     this.message = `${this.results.length}件の組み合わせが見つかりました。`
 
   }
@@ -189,7 +195,7 @@ export class MmsItemTargetComponent implements OnInit {
               il = i + 25;
               jl = j + 25;
             }
-            result_map[`${i}-${j}-${k}`] = {point, counts: [i, j, k], key:`${i}-${j}-${k}`, cost: this._getCost(items, [i, j, k]), stack};
+            result_map[`${i}-${j}-${k}`] = {point, counts: [i, j, k], key:`${i}-${j}-${k}`, cost: this._getCost(items, [i, j, k]), items, target: this.targetItem};
             break;
           }
           if (j === jl) break;
@@ -211,6 +217,20 @@ export class MmsItemTargetComponent implements OnInit {
       return r1.cost - r2.cost
     });
 
+  }
+
+  public addBookmark(result: any) {
+    console.log('add result', result);
+
+    const request = indexedDB.open('mms');
+    request.onsuccess = (event: Event) => {
+      const db = (<IDBRequest>event.target).result;
+      const transaction = db.transaction(["bookmarks"], "readwrite");
+      const objectStore = transaction.objectStore("bookmarks");
+      objectStore.add(result);
+    };
+
+    return;
   }
 
 }

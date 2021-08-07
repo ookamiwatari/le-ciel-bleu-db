@@ -1,0 +1,15 @@
+<div class="List">
+  <div class="List-Item" *ngFor="let bookmark of bookmarks">
+    <p class="List-Item-Title">
+      <button mat-icon-button (click)="delete(bookmark.key)">
+        <mat-icon>cancel</mat-icon>
+      </button>
+      {{bookmark.value.target.name}}
+    </p>
+    <p class="List-Item-Text">
+      <ng-container *ngIf="bookmark.value.items[0]">{{bookmark.value.items[0].name}} x {{bookmark.value.counts[0]}}</ng-container>
+      <ng-container *ngIf="bookmark.value.items[1]">, {{bookmark.value.items[1].name}} x {{bookmark.value.counts[1]}}</ng-container>
+      <ng-container *ngIf="bookmark.value.items[2]">, {{bookmark.value.items[2].name}} x {{bookmark.value.counts[2]}}</ng-container>
+    </p>
+  </div>
+</div>

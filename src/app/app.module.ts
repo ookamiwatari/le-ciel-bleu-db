@@ -29,6 +29,7 @@ import { MmsItemInputComponent } from './mms/mms-item-input/mms-item-input.compo
 import { MmsTableComponent } from './mms/mms-table/mms-table.component';
 import { MmsSimulatorComponent } from './mms/mms-simulator/mms-simulator.component';
 import { MmsTableListComponent } from './mms/mms-table-list/mms-table-list.component';
+import { MmsBookmarkComponent } from './mms/mms-bookmark/mms-bookmark.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { MmsTableListComponent } from './mms/mms-table-list/mms-table-list.compo
     MmsTableComponent,
     MmsSimulatorComponent,
     MmsTableListComponent,
+    MmsBookmarkComponent,
   ],
   imports: [
     FormsModule,
