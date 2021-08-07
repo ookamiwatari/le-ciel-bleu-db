@@ -24,10 +24,15 @@ export class MmsComponent implements OnInit {
   }
 
   private initIndexedDb () {
-    const request = indexedDB.open('mms', 1);
+    const request = indexedDB.open('mms', 2);
 
     request.onupgradeneeded = (event: IDBVersionChangeEvent) => {
       const db = (<IDBRequest>event.target).result;
+      // 次回はここに何か足す
+      if (event.oldVersion > 1) return;
+      db.createObjectStore("itemHistories", { autoIncrement : true });
+      db.createObjectStore("targetHistories", { autoIncrement : true });
+      if (event.oldVersion > 0) return;
       db.createObjectStore("bookmarks", { autoIncrement : true });
     };
   }

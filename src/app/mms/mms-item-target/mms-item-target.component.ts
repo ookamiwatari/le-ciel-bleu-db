@@ -1,4 +1,4 @@
-import { AfterViewInit, OnInit, Component } from '@angular/core';
+import { AfterViewInit, OnInit, Component, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -40,15 +40,54 @@ export class MmsItemTargetComponent implements OnInit {
   results: any[] = [];
   message = '';
 
-  constructor () {
+  itemHistories: any = [];
+  targetHistories: any = [];
+
+  constructor (
+    private ngZone: NgZone
+  ) {
   }
 
   ngOnInit () {
+    const request = indexedDB.open('mms');
+    request.onsuccess = (event: Event) => {
+      const db = (<IDBRequest>event.target).result;
+      const transaction = db.transaction(["itemHistories", "targetHistories"], "readonly");
+      const itemObjectStore = transaction.objectStore("itemHistories");
+      const itemReq = itemObjectStore.openCursor();
+      itemReq.onsuccess = (event: any) => {
+        const cursor = event.target.result;
+        if (!cursor) {
+          this.clearInputItem(0);
+          this.clearInputItem(1);
+          this.clearInputItem(2);
+          return;
+        }
+        this.ngZone.run(() => {
+          this.itemHistories.push({ key: cursor.key, value: cursor.value });
+        });
+        cursor.continue();
+      }
+      const targetObjectStore = transaction.objectStore("targetHistories");
+      const targetReq = targetObjectStore.openCursor();
+      targetReq.onsuccess = (event: any) => {
+        const cursor = event.target.result;
+        if (!cursor) {
+          this.clearTargetItem();
+          return;
+        }
+        this.ngZone.run(() => {
+          this.targetHistories.push({ key: cursor.key, value: cursor.value });
+        });
+        cursor.continue();
+      };
+    };
   }
 
 
   private _targetFilter (value: string) {
-    return this.targetList
+    return this.targetHistories.map((t: any) => t.value).reverse()
+      .concat(this.targetList)
       .filter((item: any) => item.name.indexOf(value) != -1)
       .slice(0, 20);
   }
@@ -69,12 +108,14 @@ export class MmsItemTargetComponent implements OnInit {
   }
 
   private _inputFilter (value: string) {
-    return itemList.root['道具']
-      .filter((item: any) => { return +item['鍊金點數']})
-      .filter((item: any) => { return item['基本名稱'] && item['基本名稱'].indexOf(value) != -1})
-      .map((item: any) => { return { name: item['基本名稱'], point: +item['鍊金點數'], stack: item['可堆疊'] == '是', potential: item['可堆疊'] == '是' ? +item['鍊金點數'] * 200 : +item['鍊金點數'], cost: Math.ceil(item['價格'] * 0.7) } })
-      .sort((item1: any, item2: any) => { return item2.potential - item1.potential})
-      .slice(0, 50);
+    return this.itemHistories.map((i: any) => i.value).reverse()
+      .concat(
+        itemList.root['道具']
+        .filter((item: any) => { return +item['鍊金點數']})
+        .filter((item: any) => { return item['基本名稱'] && item['基本名稱'].indexOf(value) != -1})
+        .map((item: any) => { return { name: item['基本名稱'], point: +item['鍊金點數'], stack: item['可堆疊'] == '是', potential: item['可堆疊'] == '是' ? +item['鍊金點數'] * 200 : +item['鍊金點數'], cost: Math.ceil(item['價格'] * 0.7) } })
+        .sort((item1: any, item2: any) => { return item2.potential - item1.potential})
+      ).slice(0, 50);
   }
 
   public inputItemSelected (id: number, option: any) {
@@ -93,7 +134,66 @@ export class MmsItemTargetComponent implements OnInit {
     this.inputControls[id].setValue('');
   }
 
+  private updateHistory () {
+    const request = indexedDB.open('mms');
+    request.onsuccess = (event: Event) => {
+
+      const db = (<IDBRequest>event.target).result;
+      const transaction = db.transaction(["itemHistories", "targetHistories"], "readwrite");
+      const itemObjectStore = transaction.objectStore("itemHistories");
+
+      if (this.items[2]) {
+        const i2 = this.itemHistories.find((i: any) => i.value.name === this.items[2].name);
+        if (i2) itemObjectStore.delete(i2.key);
+        itemObjectStore.add(this.items[2]);
+      }
+
+      if (this.items[1]) {
+        const i1 = this.itemHistories.find((i: any) => i.value.name === this.items[1].name);
+        if (i1) itemObjectStore.delete(i1.key);
+        itemObjectStore.add(this.items[1]);
+      }
+
+      if (this.items[0]) {
+        const i0 = this.itemHistories.find((i: any) => i.value.name === this.items[0].name);
+        if (i0) itemObjectStore.delete(i0.key);
+        itemObjectStore.add(this.items[0]);
+      }
+
+      this.itemHistories = [];
+      const itemReq = itemObjectStore.openCursor();
+      itemReq.onsuccess = (event: any) => {
+        const cursor = event.target.result;
+        if (!cursor) return;
+        this.ngZone.run(() => {
+          this.itemHistories.push({ key: cursor.key, value: cursor.value });
+        });
+        cursor.continue();
+      }
+
+      const targetObjectStore = transaction.objectStore("targetHistories");
+      if (this.targetItem) {
+        const t = this.targetHistories.find((_t: any) => JSON.stringify(_t.value) === JSON.stringify(this.targetItem));
+        if (t) targetObjectStore.delete(t.key);
+        targetObjectStore.add(this.targetItem);
+      }
+
+      this.targetHistories = [];
+      const targetReq = targetObjectStore.openCursor();
+      targetReq.onsuccess = (event: any) => {
+        const cursor = event.target.result;
+        if (!cursor) return;
+        this.ngZone.run(() => {
+          this.targetHistories.push({ key: cursor.key, value: cursor.value });
+        });
+        cursor.continue();
+      };
+
+    };
+  }
+
   public search (): void {
+    this.updateHistory();
     if (!this.targetItem) {
       this.message = 'アイテムが選択されていません';
       return;
