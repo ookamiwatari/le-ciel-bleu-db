@@ -13,6 +13,7 @@ import { MagicComponent } from './magic/magic.component';
 import { QuestListComponent } from './quest-list/quest-list.component';
 import { QuestComponent } from './quest/quest.component';
 import { MmsComponent } from './mms/mms.component';
+import { SoulAbsorbComponent } from './soul-absorb/soul-absorb.component';
 
 const routes: Routes = [
   { path: 'item', component: ItemListComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'quest', component: QuestListComponent },
   { path: 'quest/:id', component: QuestComponent },
   { path: 'mms', component: MmsComponent },
+  { path: 'absorb', component: SoulAbsorbComponent },
   { path: 'home', component: HomeComponent },
   { path: '', component: HomeComponent },
 ];

@@ -78,7 +78,7 @@ export class MagicListComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const datas = magicList.root['法術'].filter((magic: any) => {
+    const datas = magicList.root.heromagic.filter((magic: any) => {
       return typeof magic !== 'string' && magic['編號']
     }).map((magic: any) => {
       let class_string = '';

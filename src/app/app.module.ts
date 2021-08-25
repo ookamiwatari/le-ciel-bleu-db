@@ -30,6 +30,7 @@ import { MmsTableComponent } from './mms/mms-table/mms-table.component';
 import { MmsSimulatorComponent } from './mms/mms-simulator/mms-simulator.component';
 import { MmsTableListComponent } from './mms/mms-table-list/mms-table-list.component';
 import { MmsBookmarkComponent } from './mms/mms-bookmark/mms-bookmark.component';
+import { SoulAbsorbComponent } from './soul-absorb/soul-absorb.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { MmsBookmarkComponent } from './mms/mms-bookmark/mms-bookmark.component'
     MmsSimulatorComponent,
     MmsTableListComponent,
     MmsBookmarkComponent,
+    SoulAbsorbComponent,
   ],
   imports: [
     FormsModule,

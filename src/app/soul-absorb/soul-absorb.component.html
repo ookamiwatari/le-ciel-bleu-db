@@ -1,0 +1,133 @@
+<h1 style="margin: 3vw 3vw 0 3vw">ソウルアブソーブ</h1>
+
+<div style="width: 50%; margin: 1.5vw; display: flex;">
+
+  <mat-form-field style="min-width: 200px;">
+    <mat-label>ペット名</mat-label>
+    <input type="search" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="itemSelected($event.option)" [displayWith]="displayFn">
+      <mat-option *ngFor="let option of filteredOption | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+    <button *ngIf="pet" type="button" mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearTarget()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field style="margin-left: 12px;">
+    <mat-label>レベル</mat-label>
+    <mat-select [(value)]="level" (selectionChange)="update()" style="height: 15px;">
+      <mat-option [value]="i+1" *ngFor="let item of [].constructor(150); let i = index">{{i+1}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        ステータス
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">ATK</p>
+        <p class="List-Item-Text">{{result.status.atk}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">DEF</p>
+        <p class="List-Item-Text">{{result.status.def}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">MAT</p>
+        <p class="List-Item-Text">{{result.status.mat}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">MDF</p>
+        <p class="List-Item-Text">{{result.status.mdf}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">AVO</p>
+        <p class="List-Item-Text">{{result.status.avo}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">HIT</p>
+        <p class="List-Item-Text">{{result.status.hit}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        生贄（魔王時）
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">STR</p>
+        <p class="List-Item-Text">{{result.highAbsorb.str}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">VIT</p>
+        <p class="List-Item-Text">{{result.highAbsorb.vit}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">INT</p>
+        <p class="List-Item-Text">{{result.highAbsorb.int}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">FAI</p>
+        <p class="List-Item-Text">{{result.highAbsorb.fai}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">DEX</p>
+        <p class="List-Item-Text">{{result.highAbsorb.dex}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">AGI</p>
+        <p class="List-Item-Text">{{result.highAbsorb.agi}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion class="example-headers-align" multi>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header style="font-size: large">
+      <mat-panel-title>
+        生贄（リブラ時）
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="List">
+      <div class="List-Item">
+        <p class="List-Item-Title">STR</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.str}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">VIT</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.vit}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">INT</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.int}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">FAI</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.fai}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">DEX</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.dex}}</p>
+      </div>
+      <div class="List-Item">
+        <p class="List-Item-Title">AGI</p>
+        <p class="List-Item-Text">{{result.lowAbsorb.agi}}</p>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
