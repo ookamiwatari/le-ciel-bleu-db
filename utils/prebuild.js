@@ -139,7 +139,7 @@ function convertJson(files) {
   return new Promise((resolve, reject) => {
     const fs = require('fs');
     const parseString = require('xml2js').parseString;
-    ['item', 'drop', 'monster', 'magic', 'quest', 'quest_stepinfo', 'quest_steplist'].forEach((name) => {
+    ['item', 'drop', 'monster', 'magic', 'quest', 'quest_stepinfo', 'quest_steplist', 'pet', 'petattrib'].forEach((name) => {
       const file = files.find((f) => f.name.indexOf(name+'.xml') !== -1);
       if (!file) return;
       const text = fs.readFileSync('utils/files/' + file.name, 'utf8');
