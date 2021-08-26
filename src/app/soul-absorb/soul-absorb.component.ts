@@ -86,11 +86,11 @@ export class SoulAbsorbComponent implements OnInit {
     };
     this.result.highAbsorb = {
       str: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.atk < 2000 ? this.result.status.atk / 100 : 20 ) + 5,
-      vit: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.def < 1500 ? this.result.status.def / 100 : 20 ) + 5,
+      vit: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.def < 1500 ? this.result.status.def / 75 : 20 ) + 5,
       int: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.mat < 2000 ? this.result.status.mat / 100 : 20 ) + 5,
-      fai: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.mdf < 1500 ? this.result.status.mdf / 100 : 20 ) + 5,
-      agi: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.avo < 1000 ? this.result.status.avo / 100 : 20 ) + 5,
-      dex: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.hit < 1000 ? this.result.status.hit / 100 : 20 ) + 5
+      fai: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.mdf < 1500 ? this.result.status.mdf / 75 : 20 ) + 5,
+      agi: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.avo < 1000 ? this.result.status.avo / 50 : 20 ) + 5,
+      dex: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.hit < 1000 ? this.result.status.hit / 50 : 20 ) + 5
     };
     this.result.lowAbsorb = {
       str: this.result.highAbsorb.str < this.LOW_STATE_TABLE.length ? this.LOW_STATE_TABLE[this.result.highAbsorb.str] : -1,
