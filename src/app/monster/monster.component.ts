@@ -100,8 +100,8 @@ export class MonsterComponent implements OnInit {
     const serv_drop = servDropList.root.drop.find((drop: any) => drop['編號'] === id);
     if (!drop || !serv_drop) return false;
     for (let i = 1; i <= 40; i++) {
-      //if (drop['item'+i] !== serv_drop['item'+i]) return false;
-      //if (drop['count'+i] !== serv_drop['count'+i]) return false;
+      if (drop['item'+i] !== serv_drop['item'+i]) return false;
+      if (drop['count'+i] !== serv_drop['count'+i]) return false;
     }
     return true;
   }
