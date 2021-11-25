@@ -81,6 +81,8 @@ export class DropListComponent implements AfterViewInit {
       if (drop['item'+i]) drops.push({ id: drop['item'+i], count: drop['count'+i]});
     }
     return drops.map((d) => {
+      const item = this.liteItemList.find((i) => i.id === d.id);
+      if (item) return item.name + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '2224') return '焼きカボチャの種(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '2225') return 'りんご飴(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '20250') return '黒色火薬' + (d.count !== '1' ? 'x' + d.count : '');
@@ -88,7 +90,7 @@ export class DropListComponent implements AfterViewInit {
       if (10701 < +d.id && +d.id < 10750) return 'レヴェイエ' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (31251 < +d.id && +d.id < 31287) return '本国用アイテム' + d.id + '(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
       if (d.id === '10857') return 'アシストメダル(未実装)' + (d.count !== '1' ? 'x' + d.count : '');
-      return this.liteItemList.find((i) => i.id === d.id).name + (d.count !== '1' ? 'x' + d.count : '');
+      return '不明なアイテム' + (d.count !== '1' ? 'x' + d.count : '');
     }).join(', ');
   }
 
