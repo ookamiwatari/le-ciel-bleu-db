@@ -126,5 +126,8 @@
       }
     }
   },
-  "defaultProject": "le-ciel-bleu-db"
+  "defaultProject": "le-ciel-bleu-db",
+  "cli": {
+    "analytics": "169ed2b0-6d4b-4885-9416-a27db62b27b8"
+  }
 }
