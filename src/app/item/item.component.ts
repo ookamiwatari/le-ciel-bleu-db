@@ -67,7 +67,7 @@ export class ItemComponent implements OnInit {
           if (steplist['item5'] && steplist['item5'] === info['編號']) return true;
           return false;
         }).map((steplist: any) => {
-          return questList.root['任務'].filter((quest) => {
+          return questList.root['任務'].filter((quest: any) => {
             if (quest['導引00'] && quest['導引00'] === steplist['編號']) return true;
             if (quest['導引01'] && quest['導引01'] === steplist['編號']) return true;
             if (quest['導引02'] && quest['導引02'] === steplist['編號']) return true;

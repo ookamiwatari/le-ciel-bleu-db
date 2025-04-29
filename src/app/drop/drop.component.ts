@@ -71,7 +71,7 @@ export class DropComponent implements OnInit {
       const id = this.drop['item'+i];
       if (!id) continue;
       const item = itemList.root['道具'].find((item: any) => { return item['編號'] === id; });
-      const quest = questList.root['任務'].find((quest: any) => { return quest['編號'] === this.drop['quest'+(i-20)] })
+      const quest = questList.root['任務'].find((quest: any) => { return quest['編號'] === this.drop['quest'+(i-20)] }) as any;
       const count = this.drop['count'+i];
       const prob = +this.drop['prob'+i];
       if (item) {

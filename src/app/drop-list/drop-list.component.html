@@ -1,13 +1,4 @@
 <div style="margin: 1.5vw 1.5vw 0;">
-  <mat-form-field appearance="fill" style="max-width: 30%; margin-right: 1.5vw;">
-    <mat-label>pickups</mat-label>
-    <mat-select [(ngModel)]="pickup" (selectionChange)="applyFilter(); input = '';">
-      <mat-option value=""> 未選択 </mat-option>
-      <mat-option *ngFor="let pickup of pickups" [value]="pickup.version">
-        {{pickup.version}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
   <mat-form-field appearance="fill" style="width: 50%;" [ngStyle]="{'visibility': pickup === '' ? 'unset' : 'hidden'}">
     <mat-label>Filter</mat-label>
     <input matInput [(ngModel)]="input" (keyup)="applyFilter()" placeholder="アビス">
