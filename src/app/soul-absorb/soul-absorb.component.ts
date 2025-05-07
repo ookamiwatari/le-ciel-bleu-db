@@ -71,18 +71,18 @@ export class SoulAbsorbComponent implements OnInit {
     }
 
     const attrib: any = petAttribList.root.petattrib.find((attr: any) => {
-      return +attr['寵物類型'] === +this.pet.type && +attr['等級'] === +this.level;
+      return +attr['kind'] === +this.pet.type && +attr['level'] === +this.level;
     });
 
     console.log('status', attrib);
 
     this.result.status = {
-      atk: Math.floor(attrib['攻擊']),
-      def: Math.floor(attrib['防禦']),
-      mat: Math.floor(attrib['魔攻']),
-      mdf: Math.floor(attrib['魔防']),
-      avo: Math.floor(attrib['閃躲']),
-      hit: Math.floor(attrib['命中'])
+      atk: Math.floor(attrib['attack']),
+      def: Math.floor(attrib['defend']),
+      mat: Math.floor(attrib['magic_attack']),
+      mdf: Math.floor(attrib['magic_defend']),
+      avo: Math.floor(attrib['dodge']),
+      hit: Math.floor(attrib['hit'])
     };
     this.result.highAbsorb = {
       str: Math.floor(this.level < 100 ? this.level / 20 : 5 + (this.level - 100) / 10 ) + Math.floor(this.result.status.atk < 2000 ? this.result.status.atk / 100 : 20 ) + 5,
