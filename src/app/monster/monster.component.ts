@@ -78,6 +78,7 @@ export class MonsterComponent implements OnInit {
       if (!id) continue;
       const item = itemList.root['道具'].find((item: any) => { return item['編號'] === id; });
       const quest = questList.root['任務'].find((quest: any) => { return quest['編號'] === drop['quest'+(i-20)] }) as any;
+      if(!quest) continue;
       const count = drop['count'+i];
       const prob = +drop['prob'+i];
       if (item) {
