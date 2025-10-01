@@ -235,7 +235,7 @@ export class MmsItemTargetComponent implements OnInit {
   private _getTargetPoint(target_rank: string): number {
     switch (target_rank) {
       case '30000':
-        return 0;
+        return this.isTargetHighQuality ? 2000 : 0;
       case '100000':
         return 30000;
       case '250000':
@@ -243,9 +243,9 @@ export class MmsItemTargetComponent implements OnInit {
       case '600000':
         return 250000;
       case '1400000':
-        return this.isTargetHighQuality ? 1000000 : 600000;
+        return 600000;
       case '4000000':
-        return this.isTargetHighQuality ? 3000000 : 1400000;
+        return 1400000;
       case '10000000':
         return 4000000;
       default:
@@ -290,10 +290,10 @@ export class MmsItemTargetComponent implements OnInit {
         for (let j = 0, jmax = (stack[1] && items[1] && items[1].stack) ? stack[1] * 200 : stack[1]; j <= jmax; j++) {
           for (let k = 0, kmax = (stack[2] && items[2] && items[2].stack) ? stack[2] * 200 : stack[2]; k <= kmax; k++) {
             const point = this._getPoint(items, [i, j, k]);
-            if (point < target_point || point % 26 !== target_mod) continue;
+            if (point < target_point || point % (target_point >= 600000 ? 27 : 26) !== target_mod) continue;
             if (!il || !jl) {
-              il = i + 25;
-              jl = j + 25;
+              il = i + (target_point >= 600000 ? 26 : 25);
+              jl = j + (target_point >= 600000 ? 26 : 25);
             }
             result_map[`${i}-${j}-${k}`] = {point, counts: [i, j, k], key:`${i}-${j}-${k}`, cost: this._getCost(items, [i, j, k]), items, target: this.targetItem};
             break;

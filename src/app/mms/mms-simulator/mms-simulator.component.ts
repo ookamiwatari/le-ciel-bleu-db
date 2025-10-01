@@ -49,15 +49,15 @@ export class MmsSimulatorComponent implements OnInit {
     } else {
       this.rank = 10000000;
     }
-    this.slot = this.point % 26 + 1;
+    this.slot =  this.point % (this.rank >= 4000000 ? 27 : 26) + 1;
     const drop = servDropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);
     const drops = servDropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0);
     this.items = [
       this._lotItem(drop, this.point),
-      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * 26)], this.point)
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point)
     ];
   }
 
@@ -65,7 +65,7 @@ export class MmsSimulatorComponent implements OnInit {
     const latest_drop = dropList.root.drop.find((d: any) => drop['怪物名稱'] === d['怪物名稱']);
     let rnd = Math.random() * drop.factor;
     for (let i = 1; i <= 10; i++) {
-      rnd = rnd - +drop['prob' + i];
+      rnd = rnd - +(drop['prob' + i] ? drop['prob' + i] : 10);
       if (rnd < 0) return this._findItem(latest_drop['item' + i], point)
     }
     return {
@@ -88,16 +88,10 @@ export class MmsSimulatorComponent implements OnInit {
 
   private _getCorrection (point: number) {
     const statuses = ['STR', 'VIT', 'INT', 'FAI', 'AGI', 'DEX'];
-    if (this.point <= 500000) {
+    if (Math.random() < 0.2) {
       return ''
-    } else if (this.point < 1000000) { // 1~3
-      return statuses[Math.floor(Math.random() * statuses.length)] + '+' + Math.floor(Math.random() * 3 + 1);
-    } else if (this.point < 2000000) { // 4~6
-      return statuses[Math.floor(Math.random() * statuses.length)] + '+' + Math.floor(Math.random() * 3 + 4);
-    } else if (this.point < 3000000) { // 7~9
-      return statuses[Math.floor(Math.random() * statuses.length)] + '+' + Math.floor(Math.random() * 3 + 7);
-    } else { // 10~15
-      return statuses[Math.floor(Math.random() * statuses.length)] + '+' + Math.floor(Math.random() * 6 + 10);
+    } else { // 1~10
+      return statuses[Math.floor(Math.random() * statuses.length)] + '+' + Math.floor(Math.random() * 10 + 1);
     }
   }
 

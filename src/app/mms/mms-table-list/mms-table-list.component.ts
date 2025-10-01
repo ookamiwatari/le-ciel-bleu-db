@@ -40,20 +40,22 @@ export class MmsTableListComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    const datas = dropList.root.drop.filter((drop: any) => {
-      return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2) < 27
-    }).map((drop: any) => {
-      return {
-        id: drop['編號'],
-        name: drop['怪物名稱'],
-        description: this.getDropDescription(drop),
-        memo: this.getDropMemo(drop)
-      };
-    });
-    for (const data of datas) {
-      this.dataSource.data.push(data);
-    }
-    this.dataSource.filter = '';
+    setTimeout(() => {
+      const datas = dropList.root.drop.filter((drop: any) => {
+        return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2) < 28
+      }).map((drop: any) => {
+        return {
+          id: drop['編號'],
+          name: drop['怪物名稱'],
+          description: this.getDropDescription(drop),
+          memo: this.getDropMemo(drop)
+        };
+      });
+      for (const data of datas) {
+        this.dataSource.data.push(data);
+      }
+      this.dataSource.filter = '';
+    },1000)
   }
 
   applyFilter() {
