@@ -49,15 +49,15 @@ export class MmsSimulatorComponent implements OnInit {
     } else {
       this.rank = 10000000;
     }
-    this.slot =  this.point % (this.rank >= 4000000 ? 27 : 26) + 1;
+    this.slot =  this.point % (this.rank >= 4000000 ? 26: 26) + 1;
     const drop = servDropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);
     const drops = servDropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0);
     this.items = [
       this._lotItem(drop, this.point),
-      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point),
-      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 27 : 26))], this.point)
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 26: 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 26: 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 26: 26))], this.point),
+      this._lotItem(drops[Math.floor(Math.random() * (this.rank >= 4000000 ? 26: 26))], this.point)
     ];
   }
 
