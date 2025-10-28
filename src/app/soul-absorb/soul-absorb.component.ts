@@ -20,7 +20,7 @@ export class SoulAbsorbComponent implements OnInit {
   filteredOption = this.myControl.valueChanges.pipe(startWith(''), map((value: any) => this._filter(value)));
 
   pet: any;
-  level = 140;
+  level = 130;
   result: any = {
     status: { atk: 0, def: 0, mat: 0, mdf: 0, avo: 0, hit: 0 },
     highAbsorb: { str: 0, vit: 0, int: 0, fai: 0, agi: 0, dex: 0 },
