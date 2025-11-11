@@ -32,7 +32,8 @@ export class MmsTableComponent implements OnInit {
     } else {
       this.rank = 10000000;
     }
-    this.slot = this.point % (this.rank >= 4000000 ? 26: 26) + 1;
+    const mod = dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0 && drop['item1']).length;
+    this.slot = this.point % mod + 1;
     this.items = [];
     const serv_drop = servDropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);
     const latest_drop = dropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);

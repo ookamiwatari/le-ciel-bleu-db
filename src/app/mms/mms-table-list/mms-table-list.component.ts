@@ -42,7 +42,7 @@ export class MmsTableListComponent implements OnInit {
   ngAfterViewInit() {
     setTimeout(() => {
       const datas = dropList.root.drop.filter((drop: any) => {
-        return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2) < 28
+        return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2)
       }).map((drop: any) => {
         return {
           id: drop['編號'],

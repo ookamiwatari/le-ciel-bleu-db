@@ -202,6 +202,7 @@ export class MmsItemTargetComponent implements OnInit {
     const target_rank = this.targetItem.table.match(/聖靈鍊金(\d+)-(\d+)/)[1];
     const target_mod = +this.targetItem.table.match(/聖靈鍊金(\d+)-(\d+)/)[2] - 1;
     const target_point = this._getTargetPoint(target_rank);
+    const max_mod = dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + target_rank) === 0 && drop['item1']).length;
     console.log('target_rank', target_rank);
     console.log('targetItem', this.targetItem);
     console.log('target_point', target_point);
@@ -227,7 +228,7 @@ export class MmsItemTargetComponent implements OnInit {
 
     }
 
-    this.results = this._bruteforceSearch([...this.items], target_point, target_mod);
+    this.results = this._bruteforceSearch([...this.items], target_point, target_mod, max_mod);
     this.message = `${this.results.length}件の組み合わせが見つかりました。`
 
   }
@@ -269,7 +270,7 @@ export class MmsItemTargetComponent implements OnInit {
     return point;
   }
 
-  private _bruteforceSearch (items: any, target_point: number, target_mod: number) {
+  private _bruteforceSearch (items: any, target_point: number, target_mod: number, max_mod: number) {
 
     const result_map: any = {};
     const stacks = [];
@@ -290,10 +291,10 @@ export class MmsItemTargetComponent implements OnInit {
         for (let j = 0, jmax = (stack[1] && items[1] && items[1].stack) ? stack[1] * 200 : stack[1]; j <= jmax; j++) {
           for (let k = 0, kmax = (stack[2] && items[2] && items[2].stack) ? stack[2] * 200 : stack[2]; k <= kmax; k++) {
             const point = this._getPoint(items, [i, j, k]);
-            if (point < target_point || point % (target_point >= 600000 ? 26: 26) !== target_mod) continue;
+            if (point < target_point || point % max_mod !== target_mod) continue;
             if (!il || !jl) {
-              il = i + (target_point >= 600000 ? 25 : 25);
-              jl = j + (target_point >= 600000 ? 25 : 25);
+              il = i + max_mod - 1;
+              jl = j + max_mod - 1;
             }
             result_map[`${i}-${j}-${k}`] = {point, counts: [i, j, k], key:`${i}-${j}-${k}`, cost: this._getCost(items, [i, j, k]), items, target: this.targetItem};
             break;
