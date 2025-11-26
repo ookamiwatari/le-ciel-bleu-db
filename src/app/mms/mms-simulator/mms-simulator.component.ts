@@ -7,6 +7,7 @@ import { map, startWith } from 'rxjs/operators';
 import itemList from '../../../assets/json/item.json';
 import servDropList from '../../../assets/json/serv_drop.json';
 import dropList from '../../../assets/json/drop.json';
+import event from '../../../assets/json/event.json';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class MmsSimulatorComponent implements OnInit {
       this.rank = 10000000;
     }
     const drops = servDropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0);
-    const mod = dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0 && drop['item1']).length;
+    const mod =  event.isEnabledMmsTableExtend ? dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + this.rank) === 0 && drop['item1']).length : 26;
     this.slot =  this.point % mod + 1;
     const drop = servDropList.root.drop.find((drop: any) => drop['怪物名稱'] === '聖靈鍊金' + this.rank + '-' + this.slot);
     this.items = [

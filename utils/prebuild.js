@@ -94,7 +94,8 @@ function downloadFiles(update) {
       .flat()
       .filter(
         (file) =>
-          file.path.indexOf("setting") !== -1 && file.name.indexOf("xml") !== -1
+          file.path.indexOf("setting") !== -1 && file.name.indexOf("xml") !== -1 ||
+          file.path.indexOf("map") !== -1 && file.name.indexOf("mpc") !== -1
       );
     console.log("files", files);
     if (process.env.TEST_MODE === "true") return resolve(files);

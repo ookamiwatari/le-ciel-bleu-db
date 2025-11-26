@@ -10,6 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import itemList from '../../../assets/json/item.json';
 import servDropList from '../../../assets/json/serv_drop.json';
 import dropList from '../../../assets/json/drop.json';
+import event from '../../../assets/json/event.json';
 
 export interface TableData {
   id: number;
@@ -42,7 +43,11 @@ export class MmsTableListComponent implements OnInit {
   ngAfterViewInit() {
     setTimeout(() => {
       const datas = dropList.root.drop.filter((drop: any) => {
-        return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2)
+        if (event.isEnabledMmsTableExtend) {
+          return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2)
+        } else {
+          return typeof drop !== 'string' && drop['編號'] && drop['怪物名稱'].indexOf('聖靈鍊金') === 0 && +drop['怪物名稱'].slice(-2) < 27
+        }
       }).map((drop: any) => {
         return {
           id: drop['編號'],

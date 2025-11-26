@@ -6,6 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 
 import itemList from '../../../assets/json/item.json';
 import dropList from '../../../assets/json/drop.json';
+import event from '../../../assets/json/event.json';
 
 @Component({
   selector: 'mms-item-target',
@@ -202,7 +203,7 @@ export class MmsItemTargetComponent implements OnInit {
     const target_rank = this.targetItem.table.match(/聖靈鍊金(\d+)-(\d+)/)[1];
     const target_mod = +this.targetItem.table.match(/聖靈鍊金(\d+)-(\d+)/)[2] - 1;
     const target_point = this._getTargetPoint(target_rank);
-    const max_mod = dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + target_rank) === 0 && drop['item1']).length;
+    const max_mod = event.isEnabledMmsTableExtend ? dropList.root.drop.filter((drop: any) => drop['怪物名稱'] && drop['怪物名稱'].indexOf('聖靈鍊金' + target_rank) === 0 && drop['item1']).length : 26;
     console.log('target_rank', target_rank);
     console.log('targetItem', this.targetItem);
     console.log('target_point', target_point);
